@@ -166,6 +166,7 @@ AutoTest.Net/
 # Installshield output folder
 [Ee]xpress/
 Build
+Assests/Scenes
 Library
 Logs
 Temp
