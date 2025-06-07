@@ -68,12 +68,14 @@
     <Compile Include="Assets\Scripts\Traps\Trap_FallingPlatform.cs" />
     <Compile Include="Assets\Scripts\DeadZone.cs" />
     <Compile Include="Assets\Scripts\Checkpoints\StartPoint.cs" />
+    <Compile Include="Assets\Scripts\Traps\Fire\Trap_FireButton.cs" />
     <Compile Include="Assets\Scripts\DamageTrigger.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap_SpikedBall.cs" />
     <Compile Include="Assets\Scripts\DestroyEvent.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap_Arrow.cs" />
+    <Compile Include="Assets\Scripts\Traps\Fire\Trap_Fire.cs" />
     <Compile Include="Assets\Scripts\Checkpoints\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap_Trampoline.cs" />
     <Compile Include="Assets\Scripts\Fruit\Fruit.cs" />
