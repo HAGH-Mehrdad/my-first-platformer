@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikerb: {fileID: 7612823328014054677}
-  pushForce: 10
+  pushForce: 15
 --- !u!1 &7304419427971548590
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Traps\Trap_FallingPlatform.cs" />
     <Compile Include="Assets\Scripts\DeadZone.cs" />
     <Compile Include="Assets\Scripts\Checkpoints\StartPoint.cs" />
+    <Compile Include="Assets\Scripts\Traps\Fire Delay\Trap_FireDelay.cs" />
     <Compile Include="Assets\Scripts\Traps\Fire\Trap_FireButton.cs" />
     <Compile Include="Assets\Scripts\DamageTrigger.cs" />
     <Compile Include="Assets\Scripts\Traps\Trap_SpikedBall.cs" />

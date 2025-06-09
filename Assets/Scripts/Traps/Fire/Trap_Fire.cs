@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections; // related to IEnumerator and WaitForSeconds
 
 public class Trap_Fire : MonoBehaviour
 {
