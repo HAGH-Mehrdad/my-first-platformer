@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;// To use lists
 using UnityEngine;
 
 public class Trap_Saw : MonoBehaviour
@@ -29,11 +31,33 @@ public class Trap_Saw : MonoBehaviour
     {
         UpdateWayPointsInfo();
 
+        if (wayPoints.Length == 0)//If there are no waypoints, trap will work on one point
+            return;
         transform.position = wayPointPosition[0];
     }
 
     private void UpdateWayPointsInfo()
     {
+        // We create a local list to track how many way points does this saw object has
+        List<Trap_SawWayPoint> wayPointList = new List<Trap_SawWayPoint>(GetComponentsInChildren<Trap_SawWayPoint>());
+
+        if (wayPointList.Count != wayPoints.Length)
+        {
+            if (wayPoints == null)
+            {
+                Debug.LogWarning("WayPoints array is null.");
+                return; // If wayPoints is null, we cannot proceed
+            }
+
+            wayPoints = new Transform[wayPointList.Count];
+
+            for (int i = 0; i < wayPointList.Count; i++)
+            {
+                wayPoints[i] = wayPointList[i].transform; // Assign the transform of each way point to the wayPoints array
+            }
+        }
+
+
         wayPointPosition = new Vector3[wayPoints.Length];// No matter how many waypoints we have, we will create an array of that size.
 
         // Fill the wayPointPosition array with the positions of the wayPoints so we can use them to make wayPoints the child of Saw Trap
@@ -48,6 +72,9 @@ public class Trap_Saw : MonoBehaviour
         anim.SetBool("active", canMove);
 
         if (!canMove)
+            return;
+
+        if (wayPoints.Length == 0)
             return;
 
         //From the current position move to the position of the next index
