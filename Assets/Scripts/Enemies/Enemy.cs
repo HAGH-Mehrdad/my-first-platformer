@@ -6,9 +6,10 @@ public class Enemy : MonoBehaviour
     protected Animator anim;
     protected Rigidbody2D rb;
 
+    [Header("Movement")]
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float idleDuration;//Wait duration before moving again
-    [SerializeField] protected float idleTimer;
+    protected float idleTimer; // Timer to track the idle duration
 
 
     [Header ("Basic Collision")]
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
     protected int facingDir = -1; // 1 for right, -1 for left
     protected bool facinRight = false; // true if facing right, false if facing left (by default it is faced left because the sprite is)
     protected bool isGrounded; // for when the player can fall on ground and won't keep fliping on the air
-    protected bool isGroundForwardDetected = false; // true if the enemy is on the ground / false if it will fall down
+    protected bool isGroundAheadDetected = false; // true if the enemy is on the ground / false if it will fall down
     protected bool isWallDetected = false;
 
 
@@ -51,8 +52,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void HandleCollision()
     {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down , groundCheckDistance , whatIsGround);//The ground check is cast from enemy's body rather than a child object
-        isGroundForwardDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance , whatIsGround);
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down , groundCheckDistance , whatIsGround);//The ground check is cast from enemy's body rather than a child object [to prevent enemy from fliping if it is not grounded before playing]
+        isGroundAheadDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance , whatIsGround);
         isWallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance , whatIsGround);//The wall check is cast from enemy's face or body rather than a child object
     }
 
