@@ -50,6 +50,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 1f;
     [SerializeField] private float wallCheckDistance = 1f;
     [SerializeField] private LayerMask whatIsGround;
+    [Space]
+    [SerializeField] private Transform enemyCheck;//the position of the enemy and its other information
+    [SerializeField] private float enemyCheckRadius;
+    [SerializeField] private LayerMask whatIsEnemy;
+
     private bool isGrounded;
     private bool isAirborne; // Use this flag to indicate if isGrounded or airborne should be checked at the same time
     private bool isWallDetected;
@@ -90,7 +95,7 @@ public class Player : MonoBehaviour
 
         if (isKnocked)
             return;
-
+        HandleEnemyDetection();//Checking player jumping on enemy head in this method instead of HandleCollision method
         HandleInput();
         HandleWallSlide();
         HandleMovement();
@@ -99,7 +104,24 @@ public class Player : MonoBehaviour
         HandleAnimations();
     }
 
-    
+    private void HandleEnemyDetection()
+    {
+        if (rb.linearVelocityY > 0)//when the player is falling
+            return;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyCheck.position, enemyCheckRadius , whatIsEnemy);
+
+        foreach (var enemy in colliders)//enemy is the name of each item that is stored in colliders collection
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy.gameObject);
+                Jump();
+            }
+        }
+    }
+
+
     // This is for Tampoline push force
     public void Push(Vector2 direction , float duration)
     {
@@ -364,6 +386,7 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(enemyCheck.position, enemyCheckRadius);
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundCheckDistance));//For ground check
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y)); //For wall Check
     }
