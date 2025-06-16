@@ -106,16 +106,18 @@ public class Player : MonoBehaviour
 
     private void HandleEnemyDetection()
     {
-        if (rb.linearVelocityY > 0)//when the player is falling
+        if (rb.linearVelocityY > 0)//only when the player is falling on the enemy
             return;
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemyCheck.position, enemyCheckRadius , whatIsEnemy);
 
         foreach (var enemy in colliders)//enemy is the name of each item that is stored in colliders collection
         {
-            if (enemy != null)
+            Enemy newEnemy = enemy.GetComponent<Enemy>();
+
+            if (newEnemy != null)
             {
-                Destroy(enemy.gameObject);
+                newEnemy.Die();
                 Jump();
             }
         }
