@@ -7,6 +7,10 @@ public class Enemy_Mushroom : Enemy
         base.Update();
 
         HandleAnimation();
+
+        if (isDead)
+            return;
+
         HandleCollision();
         HandleMovement();
         HandleTurnAround();

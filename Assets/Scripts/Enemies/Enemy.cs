@@ -12,6 +12,13 @@ public class Enemy : MonoBehaviour
     protected float idleTimer; // Timer to track the idle duration
 
 
+    [Header("Death Details")]
+    [SerializeField] private float deathImpact;
+    [SerializeField] private float deathRotationSpeed;
+    private int deathRotationDirection = 1;
+    protected bool isDead;
+
+
     [Header ("Basic Collision")]
     [SerializeField] protected float groundCheckDistance = 1.1f;
     [SerializeField] protected float wallCheckDistance = 0.7f;
@@ -35,6 +42,27 @@ public class Enemy : MonoBehaviour
     protected virtual void Update()
     {
         idleTimer -= Time.deltaTime;
+
+        if (isDead)
+            HandleDeathRotation();
+    }
+
+    public virtual void Die()
+    {
+        anim.SetTrigger("hit");
+
+        rb.linearVelocity = new Vector2(rb.linearVelocityX, deathImpact);
+
+        isDead = true;
+
+        if (Random.Range(0, 100) < 50)
+            deathRotationDirection = -deathRotationDirection;
+
+    }
+
+    private void HandleDeathRotation()
+    {
+        transform.Rotate(0, 0, deathRotationSpeed * facingDir * Time.deltaTime);
     }
 
     protected virtual void HandleFlip(float xValue)
