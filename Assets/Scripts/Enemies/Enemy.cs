@@ -5,17 +5,21 @@ public class Enemy : MonoBehaviour
 
     protected Animator anim;
     protected Rigidbody2D rb;
+    protected Collider2D col;
+
+    [SerializeField] private GameObject damageTrigger;
+    [Space]
 
     [Header("Movement")]
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float idleDuration;//Wait duration before moving again
+    [SerializeField] protected float moveSpeed = 2f;
+    [SerializeField] protected float idleDuration = 1.5f;//Wait duration before moving again
     protected float idleTimer; // Timer to track the idle duration
 
 
     [Header("Death Details")]
-    [SerializeField] private float deathImpact;
-    [SerializeField] private float deathRotationSpeed;
-    private int deathRotationDirection = 1;
+    [SerializeField] private float deathJumpImpact = 5;
+    [SerializeField] private float deathRotationSpeed = 150;
+    private int deathRotationDirection = 1; //For random rotation when dying
     protected bool isDead;
 
 
@@ -37,6 +41,7 @@ public class Enemy : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
     }
 
     protected virtual void Update()
@@ -49,9 +54,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        col.enabled = false;
+        damageTrigger.SetActive(false);
         anim.SetTrigger("hit");
 
-        rb.linearVelocity = new Vector2(rb.linearVelocityX, deathImpact);
+        rb.linearVelocity = new Vector2(rb.linearVelocityX, deathJumpImpact);
 
         isDead = true;
 

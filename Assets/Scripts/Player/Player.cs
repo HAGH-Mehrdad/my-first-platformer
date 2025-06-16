@@ -106,6 +106,8 @@ public class Player : MonoBehaviour
 
     private void HandleEnemyDetection()
     {
+        Debug.Log(rb.linearVelocityY);
+
         if (rb.linearVelocityY > 0)//only when the player is falling on the enemy
             return;
 
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
         {
             Enemy newEnemy = enemy.GetComponent<Enemy>();
 
-            if (newEnemy != null)
+            if (newEnemy != null && rb.linearVelocityY < 0)
             {
                 newEnemy.Die();
                 Jump();
