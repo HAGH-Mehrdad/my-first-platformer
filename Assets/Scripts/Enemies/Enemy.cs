@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,13 +8,15 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected Collider2D col;
 
-    [SerializeField] private GameObject damageTrigger;
-    [Space]
 
-    [Header("Movement")]
+    [SerializeField] protected Transform player;
+    [SerializeField] private GameObject damageTrigger;
+
+    [Header("General Info")]
     [SerializeField] protected float moveSpeed = 2f;
     [SerializeField] protected float idleDuration = 1.5f;//Wait duration before moving again
     protected float idleTimer; // Timer to track the idle duration
+    protected bool canMove;
 
 
     [Header("Death Details")]
@@ -27,6 +30,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float groundCheckDistance = 1.1f;
     [SerializeField] protected float wallCheckDistance = 0.7f;
     [SerializeField] protected LayerMask whatIsGround;
+    [SerializeField] protected LayerMask whatIsPlayer;
     [SerializeField] protected Transform groundCheck;// we cannot check ground under the mushroom, we need to check in front of him
 
 
@@ -42,6 +46,19 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+    }
+
+    protected virtual void Start()
+    {
+        InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 1);//Reference to player's position [for chicken attack at this point] (Starts immediately and repeats every second)
+    }
+
+    private void UpdatePlayerRef()
+    {
+        if (player == null)
+        {
+            player = GameManager.instance.player.transform;
+        }
     }
 
     protected virtual void Update()
@@ -63,18 +80,18 @@ public class Enemy : MonoBehaviour
         isDead = true;
 
         if (Random.Range(0, 100) < 50)
-            deathRotationDirection = -deathRotationDirection;
+            deathRotationDirection = -deathRotationDirection;//giving random death impact jump
 
     }
 
     private void HandleDeathRotation()
     {
-        transform.Rotate(0, 0, deathRotationSpeed * facingDir * Time.deltaTime);
+        transform.Rotate(0, 0, deathRotationSpeed * deathRotationDirection * Time.deltaTime);
     }
 
     protected virtual void HandleFlip(float xValue)
     {
-        if ( xValue < 0 && facinRight || xValue > 0 && !facinRight)
+        if ( xValue < transform.position.x && facinRight || xValue > transform.position.x && !facinRight)
             Flip();
     }
 
@@ -85,16 +102,15 @@ public class Enemy : MonoBehaviour
         facinRight = !facinRight;
     }
 
-    protected virtual void HandleCollision()
+    protected virtual void HandleCollision() // TODO: What if I put this method on update and don't override in other enemy scripts
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down , groundCheckDistance , whatIsGround);//The ground check is cast from enemy's body rather than a child object [to prevent enemy from fliping if it is not grounded before playing]
-        isGroundAheadDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance , whatIsGround);
+        isGroundAheadDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance , whatIsGround); // The ground check object that the enemy can decide if there is ground ahead or not, so it can flip if there is no ground ahead
         isWallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance , whatIsGround);//The wall check is cast from enemy's face or body rather than a child object
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
-
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x , groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x , groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y));//groundCheck.position or transform.position ? transform because the it is cast from enemy's face or body

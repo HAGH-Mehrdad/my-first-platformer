@@ -2,14 +2,37 @@ using UnityEngine;
 
 public class Enemy_Chicken : Enemy
 {
+
+    [Header("Chicken Detail")]
+    [SerializeField] private float aggroDuraion;
+    [SerializeField] private float detectionRange;
+    private float aggroTimer;
+    private bool playerDetected;
+
+
     protected override void Update()
     {
         base.Update();
+
+        // TODO: Somehow we should stop this counter due to memnory save (it keeps decreasing )
+        aggroTimer -= Time.deltaTime; // TODO: is it better to add this on parent class? 
 
         HandleAnimation();
 
         if (isDead)
             return;
+
+        if (playerDetected)
+        {
+            canMove = true;
+            aggroTimer = aggroDuraion;
+        }
+
+        if (aggroTimer < 0)
+        {
+            canMove = false;
+            aggroTimer = 0; // prevent from decreasing all the time
+        }
 
         HandleCollision();
         HandleMovement();
@@ -25,22 +48,38 @@ public class Enemy_Chicken : Enemy
         if (!isGroundAheadDetected || isWallDetected)
         {
             Flip();
-            idleTimer = idleDuration; // Reset the idle timer when the enemy is not grounded or hits a wall (wants to flip!)
+            canMove = false;//When it detects the wall or ledge it stops [when the it doesn't detect the player]
             rb.linearVelocityX = 0; // Stop moving when the enemy is not grounded or hits a wall
         }
     }
 
     private void HandleMovement()
     {
-        if (idleTimer > 0)
+        if (canMove == false)
             return; // If the idle [animation] timer is not finished, do not move
 
-        if (isGroundAheadDetected)
-            rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
+        HandleFlip(player.position.x);
+
+        if (isGroundAheadDetected)//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
+            rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
     }
 
     private void HandleAnimation()
     {
         anim.SetFloat("xVelocity", rb.linearVelocityX);
+    }
+
+    protected override void HandleCollision()
+    {
+        base.HandleCollision();
+
+        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.DrawLine(transform.position, new Vector2 (transform.position.x + (detectionRange * facingDir ), transform.position.y));
+
     }
 }
