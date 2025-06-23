@@ -6,8 +6,11 @@ public class Enemy_Chicken : Enemy
     [Header("Chicken Detail")]
     [SerializeField] private float aggroDuraion;
     [SerializeField] private float detectionRange;
+
+
     private float aggroTimer;
     private bool playerDetected;
+    private bool canFlip;
 
 
     protected override void Update()
@@ -62,6 +65,25 @@ public class Enemy_Chicken : Enemy
 
         if (isGroundAheadDetected)//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
             rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
+    }
+
+    protected override void HandleFlip(float xValue)
+    {
+        if (xValue < transform.position.x && facinRight || xValue > transform.position.x && !facinRight)
+        {
+            if (canFlip)
+            {
+                canFlip = false;
+                Invoke(nameof(Flip), 0.3f);
+            }
+        }
+            
+    }
+
+    protected override void Flip()
+    {
+        base.Flip();
+        canFlip = true;
     }
 
     private void HandleAnimation()
