@@ -25,13 +25,13 @@ public class Enemy_Chicken : Enemy
         if (isDead)
             return;
 
-        if (playerDetected)
+        if (playerDetected)//chase the player if it is on the radar
         {
             canMove = true;
             aggroTimer = aggroDuraion;
         }
 
-        if (aggroTimer < 0)
+        if (aggroTimer < 0)// Do not follow Player if the aggression time is over
         {
             canMove = false;
             aggroTimer = 0; // prevent from decreasing all the time
