@@ -95,13 +95,12 @@ public class Enemy_Chicken : Enemy
     {
         base.HandleCollision();
 
-        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
+        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);//Raycast for player detection
     }
 
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.DrawLine(transform.position, new Vector2 (transform.position.x + (detectionRange * facingDir ), transform.position.y));
-
+        Gizmos.DrawLine(transform.position, new Vector2 (transform.position.x + (detectionRange * facingDir ), transform.position.y)); // Gizmos for player range detection 
     }
 }
