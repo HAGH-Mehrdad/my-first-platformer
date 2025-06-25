@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 1);//Reference to player's position [for chicken attack at this point] (Starts immediately and repeats every second)
+        InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 1);//Reference to player's position (Starts immediately and repeats every second)
     }
 
     private void UpdatePlayerRef()

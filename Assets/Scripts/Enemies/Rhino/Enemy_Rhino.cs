@@ -5,10 +5,21 @@ public class Enemy_Rhino : Enemy
 {
 
     [Header("Rhino details")]
+    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float speedUpRate = 1.0f;//rate of speed change
     [SerializeField] private Vector2 impactForce = new Vector2(4,2);// I think it is better to assign default values. Because at the editor I forgot to do it at first
     [SerializeField] private float detectionRange;
+    private float defaultSpeed;
     
     private bool playerDetected;
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        defaultSpeed = moveSpeed;//Saving the moving speed
+    }
 
 
     protected override void Update()
@@ -27,6 +38,11 @@ public class Enemy_Rhino : Enemy
         if (canMove == false)
             return;
 
+        moveSpeed = moveSpeed + (speedUpRate * Time.deltaTime);
+
+        if (moveSpeed >= maxSpeed)
+            moveSpeed = maxSpeed;
+
         rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
 
         if (isWallDetected)
@@ -34,15 +50,20 @@ public class Enemy_Rhino : Enemy
 
 
         if (!isGroundAheadDetected)
-        {
-            canMove = false;
-            rb.linearVelocity = Vector2.zero;
-            Flip();
-        }
+            TurnAround();
+    }
+
+    private void TurnAround()
+    {
+       
+        canMove = false;
+        rb.linearVelocity = Vector2.zero;
+        Flip();
     }
 
     private void WallHit()
     {
+        moveSpeed = defaultSpeed;//reseting the speed
         anim.SetBool("wallHit" , true);
         rb.linearVelocity = new Vector2(impactForce.x * -facingDir, impactForce.y); // A problem I had here was that I declared Vector2 filed and I passed impactforce itself & linearVelocity.y
     }
