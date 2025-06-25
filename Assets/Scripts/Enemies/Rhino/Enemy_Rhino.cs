@@ -26,6 +26,13 @@ public class Enemy_Rhino : Enemy
             return;
 
         rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
+
+        if (!isGroundAheadDetected)
+        {
+            canMove = false;
+            rb.linearVelocity = Vector2.zero;
+            Flip();
+        }
     }
 
     protected override void HandleCollision()
