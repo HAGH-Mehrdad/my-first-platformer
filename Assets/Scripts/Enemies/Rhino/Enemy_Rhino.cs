@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class Enemy_Rhino : Enemy
 {
 
     [Header("Rhino details")]
+    [SerializeField] private Vector2 impactForce;
     [SerializeField] private float detectionRange;
     
     private bool playerDetected;
@@ -27,12 +29,24 @@ public class Enemy_Rhino : Enemy
 
         rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
 
+        if (isWallDetected)
+        {
+            WallHit();
+        }
+
+
         if (!isGroundAheadDetected)
         {
             canMove = false;
             rb.linearVelocity = Vector2.zero;
             Flip();
         }
+    }
+
+    private void WallHit()
+    {
+        anim.SetBool("wallHit" , true);
+        rb.linearVelocity = new Vector2(impactForce.x * -facingDir, impactForce.y); // A problem I had here was that I declared Vector2 filed and I passed impactforce itself & linearVelocity.y
     }
 
     protected override void HandleCollision()
