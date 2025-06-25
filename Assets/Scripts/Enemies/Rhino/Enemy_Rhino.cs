@@ -51,6 +51,7 @@ public class Enemy_Rhino : Enemy
     {
         canMove = false;
         anim.SetBool("wallHit" , false);
+        Invoke(nameof(Flip), 1); // after he hit the wall, flips 
     }
 
     protected override void HandleCollision()
