@@ -81,7 +81,7 @@ public class Enemy_Rhino : Enemy
 
         playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
 
-        if(playerDetected)
+        if(playerDetected && isGrounded)
             canMove = true;
     }
 
