@@ -55,7 +55,7 @@ public class Enemy_Rhino : Enemy
 
     private void TurnAround()
     {
-       
+        moveSpeed = defaultSpeed;
         canMove = false;
         rb.linearVelocity = Vector2.zero;
         Flip();
@@ -63,6 +63,7 @@ public class Enemy_Rhino : Enemy
 
     private void WallHit()
     {
+        canMove = false;// to prevent intervention of velocity in charge method
         moveSpeed = defaultSpeed;//reseting the speed
         anim.SetBool("wallHit" , true);
         rb.linearVelocity = new Vector2(impactForce.x * -facingDir, impactForce.y); // A problem I had here was that I declared Vector2 filed and I passed impactforce itself & linearVelocity.y
@@ -70,7 +71,6 @@ public class Enemy_Rhino : Enemy
 
     private void ChargeIsOver()// this method will be called when the hit animation is over
     {
-        canMove = false;
         anim.SetBool("wallHit" , false);
         Invoke(nameof(Flip), 1); // after he hit the wall, flips 
     }
