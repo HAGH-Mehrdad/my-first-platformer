@@ -81,7 +81,7 @@ public class Enemy_Rhino : Enemy
 
         playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
 
-        if(playerDetected && isGrounded)
+        if(playerDetected && isGrounded)// to prevent rhino to flip if it detects the player just after it hits a wall (isGrounded)
             canMove = true;
     }
 

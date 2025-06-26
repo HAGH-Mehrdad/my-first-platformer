@@ -4,13 +4,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    protected Transform player;
     protected Animator anim;
     protected Rigidbody2D rb;
-    protected Collider2D col;
+    protected Collider2D[] col;
 
 
-    [SerializeField] protected Transform player;
-    [SerializeField] private GameObject damageTrigger;
 
     [Header("General Info")]
     [SerializeField] protected float moveSpeed = 2f;
@@ -45,7 +44,7 @@ public class Enemy : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponentsInChildren<BoxCollider2D>();//Getting all colliders including the parent and child
     }
 
     protected virtual void Start()
@@ -71,8 +70,12 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        col.enabled = false;
-        damageTrigger.SetActive(false);
+
+        foreach (var colliders in col)
+        {
+            colliders.enabled = false;
+        }
+
         anim.SetTrigger("hit");
 
         rb.linearVelocity = new Vector2(rb.linearVelocityX, deathJumpImpact);
