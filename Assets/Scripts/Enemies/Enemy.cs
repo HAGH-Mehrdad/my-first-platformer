@@ -64,10 +64,17 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        HandleAnimation();
+
         idleTimer -= Time.deltaTime;
 
         if (isDead)
             HandleDeathRotation();
+    }
+
+    protected virtual void HandleAnimation()
+    {
+        anim.SetFloat("xVelocity", rb.linearVelocityX);
     }
 
     public virtual void Die()

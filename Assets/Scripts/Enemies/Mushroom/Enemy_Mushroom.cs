@@ -6,8 +6,6 @@ public class Enemy_Mushroom : Enemy
     {
         base.Update();
 
-        HandleAnimation();
-
         if (isDead)
             return;
 
@@ -37,10 +35,5 @@ public class Enemy_Mushroom : Enemy
 
         if(isGroundAheadDetected)
             rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
-    }
-
-    private void HandleAnimation()
-    {
-        anim.SetFloat("xVelocity", rb.linearVelocityX);
     }
 }

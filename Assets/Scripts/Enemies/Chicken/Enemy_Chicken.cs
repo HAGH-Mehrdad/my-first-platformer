@@ -18,8 +18,6 @@ public class Enemy_Chicken : Enemy
         // TODO: Somehow we should stop this counter due to memnory save (it keeps decreasing )
         aggroTimer -= Time.deltaTime; // TODO: is it better to add this on parent class? 
 
-        HandleAnimation();
-
         if (isDead)
             return;
 
@@ -82,10 +80,5 @@ public class Enemy_Chicken : Enemy
     {
         base.Flip();
         canFlip = true;
-    }
-
-    private void HandleAnimation()
-    {
-        anim.SetFloat("xVelocity", rb.linearVelocityX);
     }
 }

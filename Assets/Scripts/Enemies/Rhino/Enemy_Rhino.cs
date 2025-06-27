@@ -24,8 +24,6 @@ public class Enemy_Rhino : Enemy
     {
         base.Update();
 
-        anim.SetFloat("xVelocity", rb.linearVelocityX);
-
         HandleCollision();
         HandleCharge();
     }
