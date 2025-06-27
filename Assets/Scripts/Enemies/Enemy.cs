@@ -31,8 +31,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] protected LayerMask whatIsPlayer;
     [SerializeField] protected Transform groundCheck;// we cannot check ground under the mushroom, we need to check in front of him
+    [SerializeField] protected float playerDetectionRange = 15f;
 
 
+    protected bool isPlayerDetected;
     protected int facingDir = -1; // 1 for right, -1 for left
     protected bool facinRight = false; // true if facing right, false if facing left (by default it is faced left because the sprite is)
     protected bool isGrounded; // for when the player can fall on ground and won't keep fliping on the air
@@ -110,6 +112,7 @@ public class Enemy : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down , groundCheckDistance , whatIsGround);//The ground check is cast from enemy's body rather than a child object [to prevent enemy from fliping if it is not grounded before playing]
         isGroundAheadDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance , whatIsGround); // The ground check object that the enemy can decide if there is ground ahead or not, so it can flip if there is no ground ahead
         isWallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance , whatIsGround);//The wall check is cast from enemy's face or body rather than a child object
+        isPlayerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, playerDetectionRange, whatIsPlayer);//Raycast for player detection
     }
 
     protected virtual void OnDrawGizmos()
@@ -117,6 +120,7 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x , groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x , groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (wallCheckDistance * facingDir), transform.position.y));//groundCheck.position or transform.position ? transform because the it is cast from enemy's face or body
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (playerDetectionRange * facingDir), transform.position.y)); // Gizmos for player range detection
     }
 
 }

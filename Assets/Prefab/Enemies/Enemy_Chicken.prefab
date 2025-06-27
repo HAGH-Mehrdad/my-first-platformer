@@ -200,8 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5eca1538cb7f2e47b2672bbd956d441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  damageTrigger: {fileID: 4321648211681414622}
   moveSpeed: 5
   idleDuration: 1.5
   deathJumpImpact: 5
@@ -215,8 +213,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundCheck: {fileID: 3297724934305590211}
+  playerDetectionRange: 15
   aggroDuraion: 3
-  detectionRange: 15
 --- !u!1 &4321648211681414622
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,11 +5,9 @@ public class Enemy_Chicken : Enemy
 
     [Header("Chicken Detail")]
     [SerializeField] private float aggroDuraion;
-    [SerializeField] private float detectionRange;
 
 
     private float aggroTimer;
-    private bool playerDetected;
     private bool canFlip = true;
 
 
@@ -25,7 +23,7 @@ public class Enemy_Chicken : Enemy
         if (isDead)
             return;
 
-        if (playerDetected)//chase the player if it is on the radar
+        if (isPlayerDetected)//chase the player if it is on the radar
         {
             canMove = true;
             aggroTimer = aggroDuraion;
@@ -89,18 +87,5 @@ public class Enemy_Chicken : Enemy
     private void HandleAnimation()
     {
         anim.SetFloat("xVelocity", rb.linearVelocityX);
-    }
-
-    protected override void HandleCollision()
-    {
-        base.HandleCollision();
-
-        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);//Raycast for player detection
-    }
-
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.DrawLine(transform.position, new Vector2 (transform.position.x + (detectionRange * facingDir ), transform.position.y)); // Gizmos for player range detection 
     }
 }

@@ -304,10 +304,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundCheck: {fileID: 7897160301633643175}
+  playerDetectionRange: 15
   maxSpeed: 20
   speedUpRate: 10
   impactForce: {x: 4, y: 9}
-  detectionRange: 15
 --- !u!1 &5394379980080555719
 GameObject:
   m_ObjectHideFlags: 0

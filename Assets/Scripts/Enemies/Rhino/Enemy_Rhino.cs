@@ -8,10 +8,8 @@ public class Enemy_Rhino : Enemy
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float speedUpRate = 1.0f;//rate of speed change
     [SerializeField] private Vector2 impactForce = new Vector2(4,2);// I think it is better to assign default values. Because at the editor I forgot to do it at first
-    [SerializeField] private float detectionRange;
-    private float defaultSpeed;
     
-    private bool playerDetected;
+    private float defaultSpeed;
 
 
     protected override void Start()
@@ -79,15 +77,7 @@ public class Enemy_Rhino : Enemy
     {
         base.HandleCollision();
 
-        playerDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, detectionRange, whatIsPlayer);
-
-        if(playerDetected && isGrounded)// to prevent rhino to flip if it detects the player just after it hits a wall (isGrounded)
+        if(isPlayerDetected && isGrounded)// to prevent rhino to flip if it detects the player just after it hits a wall (isGrounded)
             canMove = true;
-    }
-
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + (detectionRange * facingDir), transform.position.y));
     }
 }
