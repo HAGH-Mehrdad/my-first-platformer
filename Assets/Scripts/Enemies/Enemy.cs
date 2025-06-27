@@ -64,6 +64,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        HandleCollision();
         HandleAnimation();
 
         idleTimer -= Time.deltaTime;
@@ -114,7 +115,7 @@ public class Enemy : MonoBehaviour
         facinRight = !facinRight;
     }
 
-    protected virtual void HandleCollision() // TODO: What if I put this method on update and don't override in other enemy scripts
+    protected virtual void HandleCollision() // TODO: What if I put this method on update and don't override in other enemy scripts => Actually it is better to override this method in child classes, so we can add more specific collision handling for each enemy type
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down , groundCheckDistance , whatIsGround);//The ground check is cast from enemy's body rather than a child object [to prevent enemy from fliping if it is not grounded before playing]
         isGroundAheadDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance , whatIsGround); // The ground check object that the enemy can decide if there is ground ahead or not, so it can flip if there is no ground ahead

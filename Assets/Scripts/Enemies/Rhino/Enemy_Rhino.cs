@@ -24,7 +24,6 @@ public class Enemy_Rhino : Enemy
     {
         base.Update();
 
-        HandleCollision();
         HandleCharge();
     }
 
@@ -71,7 +70,7 @@ public class Enemy_Rhino : Enemy
         Invoke(nameof(Flip), 1); // after he hit the wall, flips 
     }
 
-    protected override void HandleCollision()
+    protected override void HandleCollision() //this method is no longer in update but it will be executed due to its prescese in parent class
     {
         base.HandleCollision();
 

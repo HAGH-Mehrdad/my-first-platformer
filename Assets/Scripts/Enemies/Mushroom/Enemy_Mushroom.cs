@@ -9,7 +9,6 @@ public class Enemy_Mushroom : Enemy
         if (isDead)
             return;
 
-        HandleCollision();
         HandleMovement();
         HandleTurnAround();
     }
@@ -33,7 +32,7 @@ public class Enemy_Mushroom : Enemy
         if(idleTimer > 0)
             return; // If the idle [animation] timer is not finished, do not move
 
-        if(isGroundAheadDetected)
-            rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
+        if(isGroundAheadDetected)//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
+            rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
     }
 }

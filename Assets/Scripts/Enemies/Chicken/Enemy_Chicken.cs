@@ -33,7 +33,6 @@ public class Enemy_Chicken : Enemy
             aggroTimer = 0; // prevent from decreasing all the time
         }
 
-        HandleCollision();
         HandleMovement();
         HandleTurnAround();
     }
