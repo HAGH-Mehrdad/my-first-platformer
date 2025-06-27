@@ -33,10 +33,7 @@ public class Enemy_Rhino : Enemy
         if (canMove == false)
             return;
 
-        moveSpeed = moveSpeed + (speedUpRate * Time.deltaTime);
-
-        if (moveSpeed >= maxSpeed)
-            moveSpeed = maxSpeed;
+        HandleSpeedUp();
 
         rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
 
@@ -48,18 +45,31 @@ public class Enemy_Rhino : Enemy
             TurnAround();
     }
 
+    private void HandleSpeedUp()
+    {
+        moveSpeed = moveSpeed + (speedUpRate * Time.deltaTime);
+
+        if (moveSpeed >= maxSpeed)
+            moveSpeed = maxSpeed;
+    }
+
     private void TurnAround()
     {
-        moveSpeed = defaultSpeed;
+        SpeedReset();
         canMove = false;
         rb.linearVelocity = Vector2.zero;
         Flip();
     }
 
+    private void SpeedReset()
+    {
+        moveSpeed = defaultSpeed;
+    }
+
     private void WallHit()
     {
         canMove = false;// to prevent intervention of velocity in charge method
-        moveSpeed = defaultSpeed;//reseting the speed
+        SpeedReset();//reseting the speed
         anim.SetBool("wallHit" , true);
         rb.linearVelocity = new Vector2(impactForce.x * -facingDir, impactForce.y); // A problem I had here was that I declared Vector2 filed and I passed impactforce itself & linearVelocity.y
     }
