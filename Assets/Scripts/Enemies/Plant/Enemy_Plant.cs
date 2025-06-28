@@ -6,6 +6,7 @@ public class Enemy_Plant : Enemy
     [Header("Plant details")]
     [SerializeField] private Enemy_Bullet bulltePrefab;
     [SerializeField] private Transform gunPoint;
+    [SerializeField] private Vector2 bulletSpeed;
     [SerializeField] private float attackCooldown = 2f; // Time between attacks
     private float lastTimeAttacked;
 
@@ -24,13 +25,14 @@ public class Enemy_Plant : Enemy
     private void Attack()
     {
         lastTimeAttacked = Time.time; //To keep track of the last attack time
-
+        //CreateBullet();
         anim.SetTrigger("attack");
     }
 
     private void CreateBullet() // Creating the projectile
     {
         Enemy_Bullet bullet = Instantiate(bulltePrefab, gunPoint.position , Quaternion.identity);
+        bullet.SetVelocity(bulletSpeed * facingDir);
     }
 
 
