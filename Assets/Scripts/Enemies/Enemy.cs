@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    protected SpriteRenderer sr => GetComponent<SpriteRenderer>();
     protected Transform player;
     protected Animator anim;
     protected Rigidbody2D rb;
@@ -52,6 +53,13 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 1);//Reference to player's position (Starts immediately and repeats every second)
+
+        // Look changeDefaultFacingDirection() to understand well
+        if (sr.flipX == true && !facinRight)//check the facing direction of the enemy when the game starts. (if the designer used changing direction from context menu)
+        {
+            sr.flipX = false;
+            Flip();
+        }
     }
 
     private void UpdatePlayerRef()
@@ -112,6 +120,13 @@ public class Enemy : MonoBehaviour
     {
         facingDir *= -1;
         transform.Rotate(0, 180, 0);
+        facinRight = !facinRight;
+    }
+
+    [ContextMenu("Change Default Facing Direction")] // Right click on the Enemy.cs and choose this option for any enemy you want to flip before the game starts
+    private void changeDefaultFacingDirection()//a function that can toggle enemy's facing direction for game designers.[This method won't call anything when the game starts. so we should check the fields in start method]
+    {
+        sr.flipX = !sr.flipX; //Toggle this field 
         facinRight = !facinRight;
     }
 
