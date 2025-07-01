@@ -8,11 +8,18 @@ public class Enemy_Bullet : MonoBehaviour
     [SerializeField] private string groundLayerName = "Ground";
 
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    public void FlipSprite()
+    {
+        sr.flipX = !sr.flipX; // This method will be used from the enemy to change the projectile sprite direction.
     }
 
 

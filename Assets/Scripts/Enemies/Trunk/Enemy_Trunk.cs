@@ -40,6 +40,9 @@ public class Enemy_Trunk : Enemy
     {
         Enemy_Bullet bullet = Instantiate(bulltePrefab, gunPoint.position, Quaternion.identity);
         bullet.SetVelocity(bulletSpeed * facingDir);
+
+        if (facingDir == 1)// If the enemy is facing right, flip the bullet sprite
+            bullet.FlipSprite();
     }
 
     private void HandleTurnAround()
