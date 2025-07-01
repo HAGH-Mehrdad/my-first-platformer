@@ -103,6 +103,8 @@ public class Enemy : MonoBehaviour
         if (Random.Range(0, 100) < 50)
             deathRotationDirection = -deathRotationDirection;//giving random death impact jump
 
+        Destroy(gameObject, 10f);
+
     }
 
     private void HandleDeathRotation()
