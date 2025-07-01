@@ -4,6 +4,7 @@ public class Enemy_Snail : Enemy
 {
     [Header("Snail Details")]
     [SerializeField] private Enemy_SnailBody bodyPrefab; // Reference to the snail body prefab instead of GameObject to gain easy access to is.
+    [SerializeField] private float maxSpeed = 15f;
 
     private bool hasBody = true;
 
@@ -42,8 +43,14 @@ public class Enemy_Snail : Enemy
 
             anim.SetTrigger("hit");
 
-            idleTimer = 0; // prevent the shell to wait after hitting a wall.(it will bounce between walls none stop)
+            idleDuration = 0; // prevent the shell to wait after hitting a wall.(it will bounce between walls none stop)
             rb.linearVelocity = Vector2.zero; // Stop moving when the snail is hit
+        }
+        else if (canMove == false && hasBody == false)
+        {
+            anim.SetTrigger("hit");
+            canMove = true;
+            moveSpeed = maxSpeed;
         }
         else
         {
@@ -72,5 +79,13 @@ public class Enemy_Snail : Enemy
         newBody.SetupBody(deathJumpImpact, deathRotationSpeed * deathRotationDirection , facingDir);
 
         Destroy(newBody, 15); //destrying the snail body after 15 seconds
+    }
+
+    protected override void Flip()
+    {
+        base.Flip();
+
+        if (hasBody == false)
+            anim.SetTrigger("wallHit");
     }
 }
