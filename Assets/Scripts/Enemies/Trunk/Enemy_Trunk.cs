@@ -31,7 +31,7 @@ public class Enemy_Trunk : Enemy
 
     private void Attack()
     {
-        idleTimer = idleDuration; // Reset the idle timer when the enemy attacks
+        idleTimer = idleDuration + attackCooldown; // Reset the idle timer when the enemy attacks
         lastTimeAttacked = Time.time; //To keep track of the last attack time
         anim.SetTrigger("attack");
     }
