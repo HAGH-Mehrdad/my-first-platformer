@@ -8,9 +8,11 @@ public class DeadZone : MonoBehaviour
 
 
 
-        if( player != null ) // Question: when would it be possible to player trigger the collison but it is null ?
+        if (player != null) // Question: when would it be possible to player trigger the collison but it is null ?
+        {
             player.Die();
+            GameManager.instance.RespawnPlayer();
+        }
 
-        GameManager.instance.RespawnPlayer();
     }
 }
