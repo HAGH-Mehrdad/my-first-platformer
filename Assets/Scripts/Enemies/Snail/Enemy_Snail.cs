@@ -26,7 +26,10 @@ public class Enemy_Snail : Enemy
         if (!isGrounded)
             return; // If the enemy is not grounded, do not flip [When the designer didn't place the enemy on the ground before play]
 
-        if (!isGroundAheadDetected || isWallDetected)
+
+        bool canFlipFromLedge = !isGroundAheadDetected && hasBody;//for more readability and letting the shell fall from the ledge.
+
+        if (canFlipFromLedge || isWallDetected)
         {
             Flip();
             idleTimer = idleDuration; // Reset the idle timer when the enemy is not grounded or hits a wall (wants to flip!)
