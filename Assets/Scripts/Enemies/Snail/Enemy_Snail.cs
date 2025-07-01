@@ -81,7 +81,8 @@ public class Enemy_Snail : Enemy
 
         newBody.SetupBody(deathJumpImpact, deathRotationSpeed * deathRotationDirection , facingDir);
 
-        Destroy(newBody, 15); //destrying the snail body after 15 seconds
+        // TODO: this method won't be called.
+        Destroy(newBody, 10); //destrying the snail body after 15 seconds
     }
 
     protected override void Flip()
