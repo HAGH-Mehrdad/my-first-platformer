@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class Enemy_Snail : Enemy
 {
+    [Header("Snail Details")]
+    [SerializeField] private Enemy_SnailBody bodyPrefab; // Reference to the snail body prefab instead of GameObject to gain easy access to is.
+
     private bool hasBody = true;
+
+
     protected override void Update()
     {
         base.Update();
@@ -57,5 +62,15 @@ public class Enemy_Snail : Enemy
 
         if (isGroundAheadDetected)//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
             rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
+    }
+
+
+    private void CreateBody()
+    {
+        Enemy_SnailBody newBody = Instantiate(bodyPrefab, transform.position, Quaternion.identity);
+
+        newBody.SetupBody(deathJumpImpact, deathRotationSpeed * deathRotationDirection , facingDir);
+
+        Destroy(newBody, 15); //destrying the snail body after 15 seconds
     }
 }
