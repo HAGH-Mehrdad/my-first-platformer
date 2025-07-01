@@ -16,6 +16,8 @@ public class Enemy_Rhino : Enemy
     {
         base.Start();
 
+        canMove = false; // Rhino will not move until it detects the player at the beginning
+
         defaultSpeed = moveSpeed;//Saving the moving speed
     }
 

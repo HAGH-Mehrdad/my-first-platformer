@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float moveSpeed = 2f;
     [SerializeField] protected float idleDuration = 1.5f;//Wait duration before moving again
     protected float idleTimer; // Timer to track the idle duration
-    protected bool canMove;
+    protected bool canMove = true;
 
 
     [Header("Death Details")]
