@@ -20,9 +20,9 @@ public class Enemy : MonoBehaviour
 
 
     [Header("Death Details")]
-    [SerializeField] private float deathJumpImpact = 5;
-    [SerializeField] private float deathRotationSpeed = 150;
-    private int deathRotationDirection = 1; //For random rotation when dying
+    [SerializeField] protected float deathJumpImpact = 5;
+    [SerializeField] protected float deathRotationSpeed = 150;
+    protected int deathRotationDirection = 1; //For random rotation when dying
     protected bool isDead;
 
 
