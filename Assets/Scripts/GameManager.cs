@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -96,4 +97,6 @@ public class GameManager : MonoBehaviour
 
         GameObject newGameObject = Instantiate(prefab, position, Quaternion.identity);
     }
+
+    public void LoadEndScene() => SceneManager.LoadScene("TheEnd");
 }
