@@ -33,6 +33,9 @@ public class AnimatedBacground : MonoBehaviour
         {
             mesh = GetComponent<MeshRenderer>();
         }
-        mesh.material.mainTexture = textures[(int)backgroundType];
+
+        // Switched to sharedMaterial.mainTexture to prevent unnecessary material instantiation per frame/update,
+        // which is more performant for a constantly animating background.
+        mesh.sharedMaterial.mainTexture = textures[(int)backgroundType];
     }
 }
