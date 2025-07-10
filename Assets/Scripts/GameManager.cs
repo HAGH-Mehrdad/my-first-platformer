@@ -98,5 +98,10 @@ public class GameManager : MonoBehaviour
         GameObject newGameObject = Instantiate(prefab, position, Quaternion.identity);
     }
 
-    public void LoadEndScene() => SceneManager.LoadScene("TheEnd");
+    private void LoadEndScene() => SceneManager.LoadScene("TheEnd");
+
+    public void LevelFinished()
+    {
+        UI_InGame.instance.fadeEffect.ScreenFade(1, 0.5f,LoadEndScene);
+    }
 }
