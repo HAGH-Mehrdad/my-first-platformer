@@ -10,6 +10,8 @@ public class UI_MainMenu : MonoBehaviour
 
     [SerializeField] private float fadeDuration = 1.5f;
 
+    [SerializeField] private GameObject[] uiElements; // Array to hold different UI elements that can be switched
+
 
     private void Awake()
     {
@@ -19,6 +21,16 @@ public class UI_MainMenu : MonoBehaviour
     private void Start()
     {
         fadeEffect.ScreenFade(0,fadeDuration);
+    }
+
+    public void SwitchUI(GameObject uiToEnable)
+    {
+        for (int i = 0; i < uiElements.Length; i++)
+        {
+            uiElements[i].SetActive(false);
+        }
+
+        uiToEnable.SetActive(true);
     }
 
 
