@@ -275,7 +275,13 @@ MonoBehaviour:
   wallJumpForce: {x: 7, y: 15}
   knockbackDuration: 0.65
   knockbackPower: {x: 5, y: 7}
-  dieVFX: {fileID: 1422437305619004959, guid: ce568471a3cb72642bf221b28995f650, type: 3}
+  animators:
+  - {fileID: 22100000, guid: b992199e3eb924b4799d1b4a00fd5cb9, type: 2}
+  - {fileID: 22100000, guid: 8c6eaf62f8b0bed439250834c6eac03f, type: 2}
+  - {fileID: 22100000, guid: 8bc90c4f96301e84d947643695fcb8f7, type: 2}
+  - {fileID: 22100000, guid: 8314deb367a59ab4986dd9a139a445a6, type: 2}
+  skinId: 0
+  deathVFX: {fileID: 1422437305619004959, guid: ce568471a3cb72642bf221b28995f650, type: 3}
   groundCheckDistance: 0.8
   wallCheckDistance: 0.65
   whatIsGround:
