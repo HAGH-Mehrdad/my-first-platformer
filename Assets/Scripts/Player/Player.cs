@@ -40,8 +40,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 knockbackPower;
     private bool isKnocked;
 
-    [Header("Die")]
-    [SerializeField] private GameObject dieVFX;
+    [Header("Player Visuals")]
+    [SerializeField] private AnimatorOverrideController[] animators;
+    [SerializeField] private int skinId;
+    [SerializeField] private GameObject deathVFX;
 
 
 
@@ -78,6 +80,8 @@ public class Player : MonoBehaviour
     {
         defaultGravityScale = rb.gravityScale;
         RespawnFinished(false);
+        
+        ChooseSkin();
     }
 
     void Update()
@@ -102,6 +106,13 @@ public class Player : MonoBehaviour
         HandleFlip();
         HandleCollision();
         HandleAnimations();
+    }
+
+    public void ChooseSkin()
+    {
+        SkinManager skinManager = SkinManager.instance;
+
+        anim.runtimeAnimatorController = animators[skinManager.ChosenSkinId]; // Set the default animator controller
     }
 
     private void HandleEnemyDetection()
@@ -182,7 +193,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        GameObject newFX = Instantiate(dieVFX, transform.position, Quaternion.identity);
+        GameObject newFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Level Managment")]
+    [SerializeField] private int currentLevelIndex;
+
 
     [Header("Player")]
     [SerializeField] private GameObject playerPrefab; // Different from the Player's class
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        currentLevelIndex = SceneManager.GetActiveScene().buildIndex;// to have the information about what level we are in.
         CollectFruitsInfo();
 
     }
@@ -100,8 +104,23 @@ public class GameManager : MonoBehaviour
 
     private void LoadEndScene() => SceneManager.LoadScene("TheEnd");
 
+    private void LoadNextLevel()
+    {
+        int nextLevelIndex = currentLevelIndex + 1;
+
+        SceneManager.LoadScene("Level_" +  nextLevelIndex);
+    }
     public void LevelFinished()
     {
-        UI_InGame.instance.fadeEffect.ScreenFade(1, 0.5f,LoadEndScene);
+        UI_FadeEffect fadeEffect = UI_InGame.instance.fadeEffect;
+
+        int lastLevelIndex = SceneManager.sceneCountInBuildSettings - 2;// We have main and end scenes that's why we subtract by 2
+
+        bool noMoreLevels = currentLevelIndex == lastLevelIndex;
+
+        if (noMoreLevels)
+            fadeEffect.ScreenFade(1, 0.5f, LoadEndScene); // created an instance above so we call it with the new variable
+        else
+            fadeEffect.ScreenFade(1, 0.5f, LoadNextLevel);
     }
 }

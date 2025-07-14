@@ -5,7 +5,7 @@ public class UI_MainMenu : MonoBehaviour
 {
     private UI_FadeEffect fadeEffect;
 
-    [SerializeField] private string sceneName;// The name of the scene to load for a new game
+    [SerializeField] private string firstLevel = "Level_1";// The name of the scene to load for a new game
 
 
     [SerializeField] private float fadeDuration = 1.5f;
@@ -39,5 +39,5 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(1, fadeDuration , LoadLevelScene);// For seeing the fade out effect clikcing the new game button
     }
 
-    private void LoadLevelScene() => SceneManager.LoadScene(sceneName);
+    private void LoadLevelScene() => SceneManager.LoadScene(firstLevel);
 }
