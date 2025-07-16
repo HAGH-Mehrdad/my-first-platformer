@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    private UI_InGame uiInGame; // This will be used to access UI_InGame component because we use it a couple of times in this script
+
     [Header("Level Managment")]
+    [SerializeField] private float timer; // Timer for the level, can be used to track time taken to complete the level
     [SerializeField] private int currentLevelIndex;
     //nextLevelIndex isn't incremented; it's re-calculated based on the currentLevelIndex of the scene the GameManager is currently active in.
     private int nextLevelIndex; // We are going to use this variable to load the next level in many places
@@ -45,18 +48,31 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        uiInGame = UI_InGame.instance; // We can access the UI_InGame component from the GameManager instance
+
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;// to have the information about what level we are in.
         nextLevelIndex = currentLevelIndex + 1; // We can use this variable to load the next level in many places
+
         CollectFruitsInfo();
     }
 
-    private void CollectFruitsInfo()
+    private void Update()
+    {
+        //timer = Time.time; // This line is deprecated because it returns the time since the start of the game, not the time since the level started.
+        timer += Time.deltaTime; // We use Time.deltaTime to get the interval in seconds since the last frame, so we can update the timer every frame
+
+        uiInGame.UpdateTimerUI(timer);
+    }
+
+    private void CollectFruitsInfo()// to indicate how many fruits we have in the level and how many we have collected
     {
         //totalFruits = FindObjectsOfType<Fruit>().Length; this is deprecated
 
 
         Fruit[] allFruits = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
         totalFruits = allFruits.Length;
+
+        uiInGame.UpdateFruitUI(fruitCollected, totalFruits);
     }
 
     public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint;
@@ -84,7 +100,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void AddFruit() => fruitCollected++;
+    public void AddFruit()//pick up fruit method
+    {
+        fruitCollected++;
+        uiInGame.UpdateFruitUI(fruitCollected, totalFruits);
+    }
+
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
 
 
