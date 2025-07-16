@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Managment")]
     [SerializeField] private int currentLevelIndex;
+    //nextLevelIndex isn't incremented; it's re-calculated based on the currentLevelIndex of the scene the GameManager is currently active in.
+    private int nextLevelIndex; // We are going to use this variable to load the next level in many places
 
 
     [Header("Player")]
@@ -44,8 +46,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;// to have the information about what level we are in.
+        nextLevelIndex = currentLevelIndex + 1; // We can use this variable to load the next level in many places
         CollectFruitsInfo();
-
     }
 
     private void CollectFruitsInfo()
@@ -102,25 +104,44 @@ public class GameManager : MonoBehaviour
         GameObject newGameObject = Instantiate(prefab, position, Quaternion.identity);
     }
 
-    private void LoadEndScene() => SceneManager.LoadScene("TheEnd");
 
+    public void LevelFinished()
+    {
+        SaveLevelProgression();
+
+        LoadNextScene();
+    }
+
+    private void SaveLevelProgression()
+    {
+        PlayerPrefs.SetInt("Level" + nextLevelIndex + "Unlocked", 1); // We save the next level as unlocked in PlayerPrefs so that we can access it later
+
+        if (NoMoreLevels() == false)
+            PlayerPrefs.SetInt("ContinueLevelNumber", nextLevelIndex); // We save the next level number to use it for continue button in the main menu
+    }
+
+    private void LoadEndScene() => SceneManager.LoadScene("TheEnd");
     private void LoadNextLevel()
     {
-        int nextLevelIndex = currentLevelIndex + 1;
-
         SceneManager.LoadScene("Level_" +  nextLevelIndex);
     }
-    public void LevelFinished()
+
+    private void LoadNextScene()
     {
         UI_FadeEffect fadeEffect = UI_InGame.instance.fadeEffect;
 
+        if (NoMoreLevels())
+            fadeEffect.ScreenFade(1, 0.5f, LoadEndScene); // created an instance above so we call it with the new variable
+        else
+            fadeEffect.ScreenFade(1, 0.5f, LoadNextLevel);
+    }
+
+    private bool NoMoreLevels()
+    {
         int lastLevelIndex = SceneManager.sceneCountInBuildSettings - 2;// We have main and end scenes that's why we subtract by 2
 
         bool noMoreLevels = currentLevelIndex == lastLevelIndex;
 
-        if (noMoreLevels)
-            fadeEffect.ScreenFade(1, 0.5f, LoadEndScene); // created an instance above so we call it with the new variable
-        else
-            fadeEffect.ScreenFade(1, 0.5f, LoadNextLevel);
+        return noMoreLevels;
     }
 }
