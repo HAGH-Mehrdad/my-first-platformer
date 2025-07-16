@@ -112,6 +112,9 @@ public class Player : MonoBehaviour
     {
         SkinManager skinManager = SkinManager.instance;
 
+        if( skinManager == null )
+            return;// in order to avoid null reference exception when we want to test the levels instead of playing the game form main menu
+
         anim.runtimeAnimatorController = animators[skinManager.ChosenSkinId]; // Set the default animator controller
     }
 
