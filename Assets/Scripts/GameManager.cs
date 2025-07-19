@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private UI_InGame uiInGame; // This will be used to access UI_InGame component because we use it a couple of times in this script
 
     [Header("Level Managment")]
-    [SerializeField] private float timer; // Timer for the level, can be used to track time taken to complete the level
+    [SerializeField] private float levelTimer; // Timer for the level, can be used to track time taken to complete the level
     [SerializeField] private int currentLevelIndex;
     //nextLevelIndex isn't incremented; it's re-calculated based on the currentLevelIndex of the scene the GameManager is currently active in.
     private int nextLevelIndex; // We are going to use this variable to load the next level in many places
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Fruits Managment")]
     public bool fruitsAreRandom;
-    public int fruitCollected;
+    public int fruitsCollected;
     public int totalFruits;
 
     [Header("Checkpoint")]
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //timer = Time.time; // This line is deprecated because it returns the time since the start of the game, not the time since the level started.
-        timer += Time.deltaTime; // We use Time.deltaTime to get the interval in seconds since the last frame, so we can update the timer every frame
+        levelTimer += Time.deltaTime; // We use Time.deltaTime to get the interval in seconds since the last frame, so we can update the timer every frame
 
-        uiInGame.UpdateTimerUI(timer);
+        uiInGame.UpdateTimerUI(levelTimer);
     }
 
     private void CollectFruitsInfo()// to indicate how many fruits we have in the level and how many we have collected
@@ -72,7 +72,9 @@ public class GameManager : MonoBehaviour
         Fruit[] allFruits = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
         totalFruits = allFruits.Length;
 
-        uiInGame.UpdateFruitUI(fruitCollected, totalFruits);
+        uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
+
+        PlayerPrefs.SetInt("Level" + currentLevelIndex + "totalFruits", totalFruits);
     }
 
     public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint;
@@ -102,8 +104,8 @@ public class GameManager : MonoBehaviour
 
     public void AddFruit()//pick up fruit method
     {
-        fruitCollected++;
-        uiInGame.UpdateFruitUI(fruitCollected, totalFruits);
+        fruitsCollected++;
+        uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
     }
 
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
@@ -130,7 +132,33 @@ public class GameManager : MonoBehaviour
     {
         SaveLevelProgression();
 
+        SaveBestTime();
+
+        SaveFruitsInfo();
+
         LoadNextScene();
+    }
+
+    private void SaveFruitsInfo()
+    {
+
+        int fruitsCollectedBefore = PlayerPrefs.GetInt("Level" + currentLevelIndex + "FruitsCollected", 0);
+        
+        if( fruitsCollectedBefore < fruitsCollected)// We only save the fruits collected if the current value is greater than the previous one[Best collects]
+            PlayerPrefs.SetInt("Level" + currentLevelIndex + "FruitsCollected", fruitsCollected);
+
+        int totalFruitsInBank = PlayerPrefs.GetInt("TotalFruitsAmount");
+
+        PlayerPrefs.SetInt("TotalFruitsAmount" , totalFruitsInBank + fruitsCollected); // We save the total fruits collected in the game so far
+
+    }
+
+    private void SaveBestTime()// Save the time that the player took to complete the level
+    {
+        float lastTimeFinished = PlayerPrefs.GetFloat("Level" + currentLevelIndex + "BestTime",999);
+
+        if(levelTimer < lastTimeFinished)
+            PlayerPrefs.SetFloat("Level" + currentLevelIndex + "BestTime" , levelTimer);
     }
 
     private void SaveLevelProgression()

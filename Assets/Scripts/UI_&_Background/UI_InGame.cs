@@ -27,7 +27,7 @@ public class UI_InGame : MonoBehaviour
 
     public void UpdateFruitUI(int collectedFruits, int totalFruits)
     {
-        fruitTxt.text = $"{collectedFruits}/{totalFruits}";
+        fruitTxt.text = $"{collectedFruits} / {totalFruits}";
     }
 
     public void UpdateTimerUI(float time)
