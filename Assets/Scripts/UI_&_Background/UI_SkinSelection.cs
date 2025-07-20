@@ -23,7 +23,7 @@ public class UI_SkinSelection : MonoBehaviour
         UpdateSkinDisplay();
     }
 
-    private void LoadSkinUnlocks()
+    private void LoadSkinUnlocks()// to load the skins that are unlocked at the beginning of the game.
     {
         for (int i = 1; i < skinList.Length; i++)//starts at one because no matter what the first skin is unlocked
         {
@@ -41,6 +41,8 @@ public class UI_SkinSelection : MonoBehaviour
             BuySkin(skinIndex);
         else
             SkinManager.instance.SetSkinId(skinIndex);
+
+        UpdateSkinDisplay();
     }
 
     public void NextSkin()
@@ -95,6 +97,12 @@ public class UI_SkinSelection : MonoBehaviour
 
     private void BuySkin(int index)// the functionality is save the information about the skin
     {
+        if (HaveEnoughFruits(skinList[index].skinPrice) == false)
+        {
+            Debug.Log("Not enough fruits!");
+            return;
+        }
+
         string skinName = skinList[skinIndex].skinName;
         skinList[skinIndex].unlocked = true; // unlock the skin
 
@@ -103,4 +111,15 @@ public class UI_SkinSelection : MonoBehaviour
 
 
     private int FruitsInBank() => PlayerPrefs.GetInt("TotalFruitsAmount");
+
+    private bool HaveEnoughFruits(int price)
+    {
+        if (FruitsInBank() >= price)
+        {
+            PlayerPrefs.SetInt("TotalFruitsAmount", FruitsInBank() - price); // deduct the price from the bank
+            return true;
+        }
+        else
+            return false;
+    }
 }
