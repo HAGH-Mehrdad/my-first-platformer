@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
 
             if (gameManager.FruitsCollected() <= 0)
             {
+                Die();
                 gameManager.RestartLevel();
             }
             else
@@ -139,8 +140,9 @@ public class Player : MonoBehaviour
         if (gameDifficulty == DifficultyType.Normal)
         {
 
-            if (gameManager.FruitsCollected() <= 0)
+            if (gameManager.FruitsCollected() <= 2)
             {
+                Die();
                 gameManager.RestartLevel();
             }
             else
