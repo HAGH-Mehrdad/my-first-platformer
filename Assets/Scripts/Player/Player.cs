@@ -117,6 +117,42 @@ public class Player : MonoBehaviour
     }
 
 
+    public void Damage() // public to call it on DamageTrigger.cs
+    {
+
+        if (gameDifficulty == DifficultyType.Easy)
+        {
+            gameManager.RemoveFruitEasyMode();
+
+            if (gameManager.FruitsCollected() <= 0)
+            {
+                // restart the level
+            }
+
+            return;
+        }
+
+
+        if (gameDifficulty == DifficultyType.Normal)
+        {
+            gameManager.RemoveFruitNormalMode();
+
+            if (gameManager.FruitsCollected() <= 0)
+            {
+                // restart the level
+            }
+
+            return;
+        }
+
+
+        if (gameDifficulty == DifficultyType.Hard)
+        {
+            //restart level
+        }
+    }
+
+
     private void UpdateGameDifficulty()
     {
         DifficultyManager difficultyManager = DifficultyManager.instance; // Get the DifficultyManager instance

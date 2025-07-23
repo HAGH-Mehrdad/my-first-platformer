@@ -108,6 +108,20 @@ public class GameManager : MonoBehaviour
         uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
     }
 
+    public void RemoveFruitEasyMode()
+    {
+        fruitsCollected--;
+        uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
+    }
+
+    public void RemoveFruitNormalMode()
+    {
+        fruitsCollected -= 3;
+        uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
+    }
+
+    public int FruitsCollected() => fruitsCollected;
+
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
 
 
