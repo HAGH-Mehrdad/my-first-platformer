@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveFruitNormalMode()
     {
-        fruitsCollected -= 3;
+        fruitsCollected -= 2;
         uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
     }
 
