@@ -81,6 +81,13 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        DifficultyManager difficultyManager = DifficultyManager.instance;
+
+        if (difficultyManager != null && difficultyManager.difficulty == DifficultyType.Hard)
+        {
+            return; // In hard mode, we don't respawn the player, we just let them die
+        }
+
         //Becasue we want to refill the player parameter and line below is game object we do it in a better way
         //player = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity).GetComponent<Player>();
 
@@ -182,6 +189,13 @@ public class GameManager : MonoBehaviour
         if (NoMoreLevels() == false)
             PlayerPrefs.SetInt("ContinueLevelNumber", nextLevelIndex); // We save the next level number to use it for continue button in the main menu
     }
+
+    public void RestartLevel()
+    {
+        UI_InGame.instance.fadeEffect.ScreenFade(1, 0.5f ,LoadCurrentScene);
+    }
+
+    private void LoadCurrentScene() => SceneManager.LoadScene("Level_" + currentLevelIndex);
 
     private void LoadEndScene() => SceneManager.LoadScene("TheEnd");
     private void LoadNextLevel()
