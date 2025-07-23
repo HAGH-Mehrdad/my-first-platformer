@@ -7,6 +7,10 @@ using UnityEditor.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+
+    private DifficultyType gameDifficulty;
+    private GameManager gameManager;
+
     private Rigidbody2D rb;
     private Animator anim;
     private CapsuleCollider2D cd; // The player has the "Capsule" collider 2D!
@@ -79,9 +83,13 @@ public class Player : MonoBehaviour
     private void Start()
     {
         defaultGravityScale = rb.gravityScale;
+        gameManager = GameManager.instance; // Get the GameManager instance
+
+
+        UpdateGameDifficulty();
         RespawnFinished(false);
-        
         ChooseSkin();
+
     }
 
     void Update()
@@ -107,6 +115,16 @@ public class Player : MonoBehaviour
         HandleCollision();
         HandleAnimations();
     }
+
+
+    private void UpdateGameDifficulty()
+    {
+        DifficultyManager difficultyManager = DifficultyManager.instance; // Get the DifficultyManager instance
+
+        if (difficultyManager != null)
+            gameDifficulty = difficultyManager.difficulty; // Get the current difficulty of the game
+    }
+
 
     public void ChooseSkin()
     {
