@@ -122,33 +122,39 @@ public class Player : MonoBehaviour
 
         if (gameDifficulty == DifficultyType.Easy)
         {
-            gameManager.RemoveFruitEasyMode();
 
             if (gameManager.FruitsCollected() <= 0)
             {
-                // restart the level
+                gameManager.RestartLevel();
+            }
+            else
+            {
+                gameManager.RemoveFruitEasyMode();
             }
 
-            return;
+                return;
         }
 
 
         if (gameDifficulty == DifficultyType.Normal)
         {
-            gameManager.RemoveFruitNormalMode();
 
             if (gameManager.FruitsCollected() <= 0)
             {
-                // restart the level
+                gameManager.RestartLevel();
+            }
+            else
+            {
+                gameManager.RemoveFruitNormalMode();
             }
 
-            return;
+                return;
         }
 
 
         if (gameDifficulty == DifficultyType.Hard)
         {
-            //restart level
+            gameManager.RestartLevel();
         }
     }
 
