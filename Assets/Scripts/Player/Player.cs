@@ -156,6 +156,7 @@ public class Player : MonoBehaviour
 
         if (gameDifficulty == DifficultyType.Hard)
         {
+            Die(); // In hard mode, the player dies immediately
             gameManager.RestartLevel();
         }
     }
