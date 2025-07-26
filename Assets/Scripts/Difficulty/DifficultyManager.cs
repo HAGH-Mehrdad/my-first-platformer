@@ -20,4 +20,8 @@ public class DifficultyManager : MonoBehaviour
     }
 
     public void SetupDifficulty(DifficultyType difficulty) => this.difficulty = difficulty;
+    public void LoadDifficulty(int difficultyIndex)
+    {
+        difficulty = (DifficultyType)difficultyIndex;
+    }
 }

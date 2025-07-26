@@ -29,7 +29,7 @@ public class UI_MainMenu : MonoBehaviour
         fadeEffect.ScreenFade(0, fadeDuration);
     }
 
-    public void SwitchUI(GameObject uiToEnable)
+    public void SwitchUI(GameObject uiToEnable)// Method to switch between different UI elements & use it in skin ui selection 
     {
         for (int i = 0; i < uiElements.Length; i++)
         {
@@ -56,6 +56,10 @@ public class UI_MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
+        int difficultyIndex = PlayerPrefs.GetInt("GameDifficulty" , 1);
+
+        DifficultyManager.instance.LoadDifficulty(difficultyIndex); // Load the saved difficulty level
+
         int levelToLoad = PlayerPrefs.GetInt("ContinueLevelNumber", 0); // Get the saved level number to continue
         SceneManager.LoadScene("Level_" + levelToLoad); // Load the saved level
     }

@@ -152,7 +152,7 @@ RectTransform:
   m_Father: {fileID: 500177714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.558, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -973,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &276401353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1309,11 +1309,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1362399943}
         m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
-        m_MethodName: NewGame
-        m_Mode: 1
+        m_MethodName: SwitchUI
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1543566746}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1780,11 +1780,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1362399943}
         m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
-        m_MethodName: NewGame
-        m_Mode: 1
+        m_MethodName: SwitchUI
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1543566746}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2671,7 +2671,7 @@ MonoBehaviour:
         m_MethodName: SwitchUI
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1543566746}
+          m_ObjectArgument: {fileID: 679470959}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3094,7 +3094,7 @@ RectTransform:
   m_Father: {fileID: 1391985493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.558, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3617,8 +3617,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 212688232}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.558, y: 0}
+  m_AnchorMax: {x: 0.558, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4050,8 +4050,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1057334705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.558, y: 0}
+  m_AnchorMax: {x: 0.558, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4371,11 +4371,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1362399943}
         m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
-        m_MethodName: NewGame
-        m_Mode: 1
+        m_MethodName: SwitchUI
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1543566746}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4561,6 +4561,8 @@ MonoBehaviour:
   - {fileID: 2133496578}
   - {fileID: 1543566746}
   - {fileID: 276401352}
+  - {fileID: 679470959}
+  - {fileID: 161763013}
   continueButton: {fileID: 1608452539}
 --- !u!1 &1371890471
 GameObject:
@@ -10570,7 +10572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2133496579
 RectTransform:
   m_ObjectHideFlags: 0

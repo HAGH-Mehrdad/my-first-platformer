@@ -433,14 +433,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc75e86937c50794a88bdf41171af273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
+  levelTimer: 0
   currentLevelIndex: 0
   playerPrefab: {fileID: 7574205665898165667, guid: 651b467688d220644a3d5a6cecb75e1e, type: 3}
   respawnPoint: {fileID: 486967532}
   respawnDelay: 1.5
   player: {fileID: 1793824620}
   fruitsAreRandom: 0
-  fruitCollected: 0
+  fruitsCollected: 0
   totalFruits: 0
   canReactivated: 0
   arrowPrefab: {fileID: 4850262728540898323, guid: 60b2eafe1560fe940b05d2d300fc9bd2, type: 3}

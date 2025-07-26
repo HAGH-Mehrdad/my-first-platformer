@@ -5,6 +5,9 @@ using UnityEngine;
 public class UI_SkinSelection : MonoBehaviour
 {
 
+    private UI_LevelCreation levelCreation;
+    private UI_MainMenu mainMenu; // to access SwithUI method
+
     [SerializeField] private Skin[] skinList;
 
     [Header("UI details")]
@@ -21,6 +24,10 @@ public class UI_SkinSelection : MonoBehaviour
     {
         LoadSkinUnlocks();
         UpdateSkinDisplay();
+
+        mainMenu = GetComponentInParent<UI_MainMenu>(); // Get the main menu component to access SwitchUI method (it is in the Canvas game object)
+
+        levelCreation = mainMenu.GetComponentInChildren<UI_LevelCreation>(true); // Get the level creation component to access SwitchUI method (it is in the level selection game object)
     }
 
     private void LoadSkinUnlocks()// to load the skins that are unlocked at the beginning of the game.
@@ -40,7 +47,10 @@ public class UI_SkinSelection : MonoBehaviour
         if (skinList[skinIndex].unlocked == false)
             BuySkin(skinIndex);
         else
+        {
             SkinManager.instance.SetSkinId(skinIndex);
+            mainMenu.SwitchUI(levelCreation.gameObject); // Switch to the level creation UI when a skin is selected
+        }
 
         UpdateSkinDisplay();
     }
