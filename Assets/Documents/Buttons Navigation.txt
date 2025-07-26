@@ -1,0 +1,14 @@
+New game button => difficulty selection UI
+
+All difficulty buttons change to skin selection UI
+
+The select button in Skin Selection UI will navigate the UI to the next UI (level UI) BUT only if the skin is selected (purchased)
+	=> it is done through UI_SkinSelection.cs, accessing UI_MainMenu.cs and UI_LevelCreation.cs
+	=> the difficulty selection should navigate to the level selection UI
+	=> note here to avoid null reference exception is to pass a true while Getting component of level creation. this is because 
+
+Only thing is left is to pass the last difficulty to the continue button
+this means we need to save the difficulty when we select the level dedicated to the level selection UI
+	=> save the difficulty when loading the level(UI_levelButton.cs)
+	=> Load difficulty method in DifficultyManager.cs 
+	=> Load the difficulty type in the main menu, continue button
