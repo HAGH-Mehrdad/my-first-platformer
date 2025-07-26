@@ -28,6 +28,8 @@ public class UI_LevelButton : MonoBehaviour
     }
     public void LoadLevel()//this will be assigned to the button to load the level that is created by the UI_LevelCreation.cs
     {
+        int difficultyIndex = ((int)DifficultyManager.instance.difficulty);
+        PlayerPrefs.SetInt("GameDifficulty", difficultyIndex);
         SceneManager.LoadScene(sceneName);
     }
 
