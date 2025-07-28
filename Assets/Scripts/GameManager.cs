@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public bool fruitsAreRandom;
     public int fruitsCollected;
     public int totalFruits;
+    public int allFruits;
 
     [Header("Checkpoint")]
     public bool canReactivated; // If true, the checkpoint can be activated again and again (we can reactivate it in the inspector)
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         nextLevelIndex = currentLevelIndex + 1; // We can use this variable to load the next level in many places
 
         CollectFruitsInfo();
+        ShowAllFruitsInBank(); // to know how many fruits does the player has collected
     }
 
     private void Update()
@@ -172,6 +174,11 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("TotalFruitsAmount" , totalFruitsInBank + fruitsCollected); // We save the total fruits collected in the game so far
 
+    }
+
+    private void ShowAllFruitsInBank()
+    {
+        allFruits = PlayerPrefs.GetInt("TotalFruitsAmount");
     }
 
     private void SaveBestTime()// Save the time that the player took to complete the level
