@@ -251,6 +251,7 @@ public class Player : MonoBehaviour
         if (isKnocked)
             return;
 
+        CameraManager.instance.ShakeCamera(knockbackDirection); // Shake the camera when the player is knocked back
 
         StartCoroutine(KnockbackRoutine());
 

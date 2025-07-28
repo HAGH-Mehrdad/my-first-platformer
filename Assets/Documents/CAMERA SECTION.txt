@@ -1,0 +1,13 @@
+CAMERA SECTION
+
+- using Cinemachine Camera
+	=> Cinemachine => targeted cameras => 2d cameras 
+- using Cinemachine confiner 2d and add an object with only a box collider 2d which is triggered is enough to control the camera where to show and where to not show.
+
+CAMERA SHAKE
+- using an impulse to shake the camera when the player hits an obstacle or trap 
+- we need to add a listener to the camera manager game object (the parent of main camera) in which it listens to the impulses generated in the function we need (knock back 	method)
+- in Cinemachine game object we need to add extension cinemachine impulse listener 
+- this should be singleton in order to be used anywhere we want
+- getting the component and giving the velocity and GenerateImpluse() methods.
+- we can modify the shake shape like bump or explosion shake with the field of impulse shape in Cinemachine Impulse source component.
