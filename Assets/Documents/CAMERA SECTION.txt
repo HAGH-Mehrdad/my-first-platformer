@@ -11,3 +11,12 @@ CAMERA SHAKE
 - this should be singleton in order to be used anywhere we want
 - getting the component and giving the velocity and GenerateImpluse() methods.
 - we can modify the shake shape like bump or explosion shake with the field of impulse shape in Cinemachine Impulse source component.
+
+CAMERA TRANSITION
+- consists of more than 1 part level in which the camera transits to the next section in the same level.
+- Added an extra Level camera to the point that we want to have. for example, if we have two sections on a level, two level camera objects we need.
+- We need 2 scripts: a level camera and a level camera trigger (one for following the player and the other for activating trigger on each cinemachine limits respectively.) 
+	=> LevelCamera.cs on LevelCamera object in which it needs to access the cinemachine camera component on Main camera object. 
+	=> LevelCameraTrigger.cs on CinemachineLimits object to trigger the object we want to follow. [Call a method, asking the main camera to follow the player.]
+- In order to have a smooth blend transition, we need to put 2 camera limits colliders next to each other. 
+- To control the transition, on main camera object => cinemachine brain component, blend can change the transition (I like the cut blend but I guess in this game I should use ease in out with 1 sec duration)
