@@ -2462,7 +2462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693961479011569179, guid: 613cff6f7b2927049a543803c05b8c13, type: 3}
       propertyPath: Lens.OrthographicSize
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6693961479011569179, guid: 613cff6f7b2927049a543803c05b8c13, type: 3}
       propertyPath: Target.TrackingTarget
@@ -11606,6 +11606,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 4956498610425008341, guid: 613cff6f7b2927049a543803c05b8c13, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.720001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4956498610425008341, guid: 613cff6f7b2927049a543803c05b8c13, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.23
+      objectReference: {fileID: 0}
     - target: {fileID: 6091707376526861648, guid: 613cff6f7b2927049a543803c05b8c13, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11669,11 +11677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5705683051772375287, guid: 651b467688d220644a3d5a6cecb75e1e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.44
+      value: -15.72
       objectReference: {fileID: 0}
     - target: {fileID: 5705683051772375287, guid: 651b467688d220644a3d5a6cecb75e1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.08
+      value: -8.23
       objectReference: {fileID: 0}
     - target: {fileID: 5705683051772375287, guid: 651b467688d220644a3d5a6cecb75e1e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11786,18 +11794,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 187051433587015231, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 404377054404770755, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
-      propertyPath: DefaultBlend.Time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 404377054404770755, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
-      propertyPath: DefaultBlend.Style
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1293147177367824680, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.14625931
@@ -11841,14 +11837,6 @@ PrefabInstance:
     - target: {fileID: 3211025927365532113, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
       propertyPath: m_Name
       value: Camera Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4975255044210812800, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4975255044210812800, guid: 71d7a229b3428b6468d17dcf2d49b34b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

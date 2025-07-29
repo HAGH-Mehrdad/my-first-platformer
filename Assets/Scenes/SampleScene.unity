@@ -852,6 +852,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trap_Saw (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5367663463980016399, guid: f5576520712ebe64b9950798ca84df5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6298238441270653745, guid: f5576520712ebe64b9950798ca84df5b, type: 3}
       propertyPath: 'wayPoints.Array.data[0]'
       value: 
@@ -1708,13 +1712,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc75e86937c50794a88bdf41171af273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTimer: 0
+  currentLevelIndex: 0
   playerPrefab: {fileID: 7574205665898165667, guid: 651b467688d220644a3d5a6cecb75e1e, type: 3}
   respawnPoint: {fileID: 486967532}
   respawnDelay: 1.5
   player: {fileID: 1793824620}
   fruitsAreRandom: 0
-  fruitCollected: 0
+  fruitsCollected: 0
   totalFruits: 0
+  allFruits: 0
   canReactivated: 0
   arrowPrefab: {fileID: 4850262728540898323, guid: 60b2eafe1560fe940b05d2d300fc9bd2, type: 3}
 --- !u!1001 &1336480344
@@ -16486,7 +16493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518066749877931302, guid: b8d261f6b1114dc4bb5d2fe479e51d9f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
