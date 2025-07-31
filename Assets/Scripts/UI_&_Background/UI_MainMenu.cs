@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,13 @@ public class UI_MainMenu : MonoBehaviour
     [SerializeField] private GameObject[] uiElements; // Array to hold different UI elements that can be switched
 
     [SerializeField] private GameObject continueButton; // Button to continue the game, if applicable
+
+    [SerializeField] private MenuCharacter menuCharacter; // Reference to the MenuCharacter script for character movement in main menu
+
+    [Header("Interactive Camera")]
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+    [SerializeField] private Transform mainMenuPoint;
+    [SerializeField] private Transform skinSelectionPoint;
 
     private void Awake()
     {
@@ -62,5 +70,17 @@ public class UI_MainMenu : MonoBehaviour
 
         int levelToLoad = PlayerPrefs.GetInt("ContinueLevelNumber", 0); // Get the saved level number to continue
         SceneManager.LoadScene("Level_" + levelToLoad); // Load the saved level
+    }
+
+    public void MoveCameraToMainMenu()
+    {
+        menuCharacter.MoveTo(mainMenuPoint);
+        cinemachineCamera.Follow = mainMenuPoint;
+    }
+
+    public void MoveCameraToSkinSelectionMenu()
+    {
+        menuCharacter.MoveTo(skinSelectionPoint);
+        cinemachineCamera.Follow = skinSelectionPoint;
     }
 }

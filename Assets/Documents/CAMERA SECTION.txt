@@ -20,3 +20,14 @@ CAMERA TRANSITION
 	=> LevelCameraTrigger.cs on CinemachineLimits object to trigger the object we want to follow. [Call a method, asking the main camera to follow the player.]
 - In order to have a smooth blend transition, we need to put 2 camera limits colliders next to each other. 
 - To control the transition, on main camera object => cinemachine brain component, blend can change the transition (I like the cut blend but I guess in this game I should use ease in out with 1 sec duration)
+
+
+INTERACTIVE CAMERA
+- in this section I want to add a feature that moves the camera when the player wants to select a skin in main menu.
+- a start point to a skin selection point where the camera and the main menu character moves towards it. 
+- we need 3 references of two points and the camera. 
+- then we need to methods which are public to move to the points. => add these methods to the indicated buttons. 
+- then we need to add a script to the character and move it to the indicated point (skin selection point) 
+- I created the MenuCharacter.cs in the camera folder script in order to remember that the character movement is related to the camera 
+- as of now we need references to 
+- 
