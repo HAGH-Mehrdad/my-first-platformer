@@ -1,0 +1,35 @@
+ENEMY RHNO
+
+RHINO
+- adding rhino animations and create blend tree. => using mushroom prefab and changing the components
+- the blend tree needs only idle and move. the hit and hit wall needs other conditions. hit from any states with a trigger[remember to can move to itself needs to be off]
+	and hit wall from idle and move animation with a Boolean condition
+
+- Added script and copied player detection from chicken script. IT MUST INHERITE from Enemy base class. 
+- Added charge toward player -- it will fall from the pit and we want to make it flip in wall or ledge detection
+	=> Use ground ahead or is wall detection to program the rhino to not move, stop the velocity and flip
+	=> it should flip when detecting a ledge but pushes back when hitting the wall [impact force]
+	=> also need to change the animation to idle/move after hitting a wall [the charge animation over will be called as an event when the hitting animation is over]
+
+- Rhino needs to flip after the push back impact is over (with a bit of delay of course)
+	=> invoking the method flip with a delay
+
+- Increase the enemy's speed with a rate
+	=> declaring some fields and added the speed rate to the move speed/ also resets the speed after hit and flip
+
+- The rhino needs to be heavier in order to feel better
+	=> We increase the gravity scale and impact force.
+
+
+***** How does the enemy can find the source of player ? *****
+	I know it is through game manager but what is the logic?
+
+
+
+- Detection range and player detected has to move to enemy script in order to be use by many enemies. (4:50)
+
+- Moved animation handling to parent class
+
+- Moving collision handling to parent class
+
+- Making methods for speed reset and handling speed up in RHINO

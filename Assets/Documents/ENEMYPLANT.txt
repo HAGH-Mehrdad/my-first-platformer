@@ -1,0 +1,17 @@
+ENEMY PLANT
+
+Like other classes of enemies, this class should inherit from Enemy.cs
+
+- We override the update method
+- Implemented attack method. (Plays attack animation)
+- we override the HandleAnimation method but we don't call base method to prevent getting handling movement animation warning ( anim.setFloat("xVelocity", rb.linearVelocityX);
+- attack is executing after the animation is over immediately. we need some sort of delay (routine) for plant to attack after a certain amount of time.
+	=> this was accomplished with checking the last time enemy attacked in the attack method and checking if it can attack in update method. 
+- Now we want to instantiate the bullet
+	=> create a class that have access to rigid body
+	=> we declared some of bullet functionality and setting the velocity public so we can use it in animation event
+
+(-0.939 , 0.131) the position of the bullet when shooting from the plant
+
+- We need to flip the plant where we want to place it in a very easy approach. 
+	=> just right click on the plant script and use the flip item

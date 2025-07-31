@@ -1,0 +1,12 @@
+ANIMATED BACKGROUND
+
+- we create an animated bc with a 3d object
+- and the material image on this 3d object creates an illusion of animated bc by reaping.
+- THIS 3D OBHECT IS "QUAD"
+- quad scale is 4
+- quad position (z) must be behind the foreground
+- for changing the color of the quad we must create a material and add it to the quad game object
+- this will change the default material with background material and we can use unlit/texture as shader.
+- we add our pictures of bc as texture.
+- for every background pics we should change their wrap mode to repeat in order to use offset to animate them.
+- Now we create a script and by accessing to mesh renderer component we change the offset 

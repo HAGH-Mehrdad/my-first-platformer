@@ -1,0 +1,26 @@
+Enemy Chicken
+9th minute
+
+Enhancing chicken movement [detecting the player and flipping with delay]
+
+What data types do we need for chicken?
+- a float duration for aggro
+- a timer for aggro
+- a Boolean that indicates if it detects the enemy
+- a float that indicates enemy detection range
+- a layer mask that detects the player
+
+
+CHIKEN
+- Stop the chicken aggression when it does not detect the player, additionally we want to stop it when it doesn't detect the wall and ledge 
+	=> canMove = false in turn around method
+
+- Turns to player if the player jumps over the chicken 
+	=> declare player ref in enemy and update its position every seconds with Invoke repeating.
+	=> passing player position in Handle Flip method. The function needs to pass a variable
+	=> handle flip method is in handle movement and the flip compares whether the player is on the left or right of the enemy
+- The enemy will die easily when you pass it. chicken should go more distance before flipping (flip with a bit of a delay)
+
+
+
+	

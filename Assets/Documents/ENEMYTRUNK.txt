@@ -1,0 +1,11 @@
+ENEMY TRUNK
+
+- the setup until creating the script is easy and like other steps of the enemy 
+- Basically the trunk behaves like mushroom except he stops moving when he detects the player and starts shooting.
+** Check the bullet's layer **
+
+- The problem I have is the enemy attacks with a delay [even walks then it detects the player] 
+	=> solved by adding attack cool down to attack method (when the enemy wants to attack, resets the idle timer to a duration plus a cool down)
+
+-The next problem is that the bullet doesn't change direction when the enemy changes direction
+

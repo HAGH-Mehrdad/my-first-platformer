@@ -1,0 +1,9 @@
+ENEMY SNAIL
+
+- setting up the object and animator
+- setting the snail behavior to act like mushroom that transfer to shell mode after being hit and die after hitting again.
+-creating another script for the snail for killing the snail itself.
+	=> we want rotation and velocity,
+	=> added it to the snail body object
+	=> we have to create a variable that can be assigned snail body prefab
+- Set up movement for the shell when the player hit it for the second time

@@ -1,0 +1,77 @@
+UI/UX
+
+- Create new game button
+- The scrip must be on the canvas game object
+
+
+ 7/7/2025
+- In this section I want to create credit menu (End game scene)
+- First we create a prefab of background so we can use it in every scene we have
+- We create an empty game object named Credits and then create texts for credits
+- We align the texts by the component named "Vertical Layout Group"
+- Align the credits and use a script to move the texts up
+- using anchoredPosition field of RectTransform class to move the texts up.
+- now we add them in order from scene management 
+- call the end game from game manager of the level scene
+- Create a skip the credits function and jump to main menu (I have removed the UI_Credits component from credits game object and move it to canvas itself so
+				we can implement all functionality from one script. => rectT field should be assigned with the credits rect Transform not the canvas)
+- The skip credit method will be assigned to button which is transparent in end game scene.
+
+
+Fade in / Fade out effect for transmitting to other scenes.
+- When we create the image to apply the fade effect, we should uncheck the Raycast Target og the image component
+
+
+SWITCH UI ELEMENTS
+
+SKIN SELECTION BETWEEN DIFFERENT PLAYERS.
+- we need to override the animation controller.
+- reassign the animations to the player controller
+- then we need assign override controller to player for different skins
+- I do this on the player script
+- For default skink we need to override animator controller of the default skin without assigning any new animations because the default animations are just there.
+- and with the help of runTimeAnimatorController field we assign skin in the player script
+- The next goal is to choose different skins with one animator controller => add a main menu character and assign the controller with animations we created 
+		=> this purpose will be done with layers in animator window
+- After that we need to bring the information to the next scene => create a game object that will not be destroyed when goes to the next scene
+
+
+LEVEL SELECTION
+
+- Add scroll view 
+- add grid view component
+- add a simple button
+- Buttons will be created as many levels are there. we need a script for button to know what scene it must load and a script to add buttons as many as levels
+	=> UI_ButtonLevel.cs attached to button 
+	=> UI_LevelSelection.cs attaches to UI_LevelCreation game object (we must exclude main menu and end menu from this creation)
+- we give the index of the new button that has been created in level creation to create the specific button to know what level it needs to load
+
+
+SAVING SYSTEM
+- for now we do this Playerprefs
+
+- We should update next level index somewhere( it is updated whenever a new scene is loaded - the start method will be called - and the index of the level is updated )
+
+SETTING UP IN GAME UI ELEMENTS
+- Updating timer and fruit amount 
+- Added the images and texts 
+- we have a problem with Time.time and this is when the scene changes, the timer won't restart because it is started as the application starts and will continue 
+
+
+PURCHASE SKIN SYSTEM
+- we should get the amount of price of each skin and pass it to their value as their price.
+- 
+
+PUASE MENU
+- Clicking on pause button or using key escape will pause the menu, leading the game to get paused and resume button and main menu button will appear.
+- after setting up time scale and isPaused condition, we need to enable pause menu and give the functionality of resume and main menu buttons. 
+- we need a reference to the pause game object and we need two functions of resuming and pausing the game. 
+
+SETTING MENU
+- adding some graphics and animations to the settings menu.
+
+FINALIZING UI SECTION
+- Managing the order of buttons and their functionality
+
+
+
