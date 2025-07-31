@@ -194,7 +194,11 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level" + nextLevelIndex + "Unlocked", 1); // We save the next level as unlocked in PlayerPrefs so that we can access it later
 
         if (NoMoreLevels() == false)
+        {
             PlayerPrefs.SetInt("ContinueLevelNumber", nextLevelIndex); // We save the next level number to use it for continue button in the main menu
+            PlayerPrefs.SetInt("LastSkinUsed", SkinManager.instance.GetSkinId()); // Save the last skin used by the player
+
+        }
     }
 
     public void RestartLevel()

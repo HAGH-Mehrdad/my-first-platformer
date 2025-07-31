@@ -62,14 +62,18 @@ public class UI_MainMenu : MonoBehaviour
         return hasProgression;
     }
 
-    public void ContinueGame()
+    public void ContinueGame() // Continue Button
     {
         int difficultyIndex = PlayerPrefs.GetInt("GameDifficulty" , 1);
 
         DifficultyManager.instance.LoadDifficulty(difficultyIndex); // Load the saved difficulty level
 
+        int lastSkinUsed = PlayerPrefs.GetInt("LastSkinUsed"); // Get the last skin used by the player
+        SkinManager.instance.SetSkinId(lastSkinUsed); // Load the last skin used by the player
+
         int levelToLoad = PlayerPrefs.GetInt("ContinueLevelNumber", 0); // Get the saved level number to continue
         SceneManager.LoadScene("Level_" + levelToLoad); // Load the saved level
+
     }
 
     public void MoveCameraToMainMenu()
