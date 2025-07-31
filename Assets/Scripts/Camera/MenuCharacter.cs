@@ -5,8 +5,6 @@ public class MenuCharacter : MonoBehaviour
     private Animator anim;
 
     [SerializeField] private float speed;
-    [SerializeField] private Transform menuPoint;
-    [SerializeField] private Transform skinSelectionPoint;
 
     private Vector3 destinationPoint;
     private bool isMoving;

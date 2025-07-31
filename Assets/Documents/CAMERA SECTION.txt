@@ -29,5 +29,5 @@ INTERACTIVE CAMERA
 - then we need to methods which are public to move to the points. => add these methods to the indicated buttons. 
 - then we need to add a script to the character and move it to the indicated point (skin selection point) 
 - I created the MenuCharacter.cs in the camera folder script in order to remember that the character movement is related to the camera 
-- as of now we need references to 
+- as of now we need references to the desination point and a Boolean for move animation. also we need speed of the movement
 - 
