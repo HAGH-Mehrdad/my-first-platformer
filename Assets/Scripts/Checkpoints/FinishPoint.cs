@@ -10,6 +10,7 @@ public class FinishPoint : MonoBehaviour
 
         if(player != null)
         {
+            AudioManager.instance.PlaySfx(2);
             anim.SetTrigger("activates");
             GameManager.instance.LevelFinished();
         }

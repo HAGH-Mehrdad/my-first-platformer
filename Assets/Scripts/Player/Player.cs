@@ -194,6 +194,7 @@ public class Player : MonoBehaviour
 
             if (newEnemy != null && rb.linearVelocityY < 0)
             {
+                AudioManager.instance.PlaySfx(1);
                 newEnemy.Die();
                 Jump();
             }
@@ -233,7 +234,7 @@ public class Player : MonoBehaviour
             rb.gravityScale = defaultGravityScale; // rigid body where it gets a global value (see the beginning of this method)
             canBeContrelled = true;// player movement
             cd.enabled = true; // Collider 
-
+            AudioManager.instance.PlaySfx(10, false); // Play the sound effect when the player respawns
         }
         else
         {
@@ -251,6 +252,8 @@ public class Player : MonoBehaviour
         if (isKnocked)
             return;
 
+        AudioManager.instance.PlaySfx(9, false); // Play the sound effect when the player is knocked back
+
         CameraManager.instance.ShakeCamera(knockbackDirection); // Shake the camera when the player is knocked back
 
         StartCoroutine(KnockbackRoutine());
@@ -260,6 +263,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        AudioManager.instance.PlaySfx(0, false);
         GameObject newFX = Instantiate(deathVFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
@@ -374,6 +378,8 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
+        AudioManager.instance.PlaySfx(3);
+
         rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
 
         canDoubleJump = true; // added here to manage jump even after coyote jump
@@ -384,6 +390,8 @@ public class Player : MonoBehaviour
         isWallJumping = false;
         canDoubleJump = false;
         rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpForce);
+
+        AudioManager.instance.PlaySfx(3);
     }
 
     private void WallJump()
@@ -392,6 +400,8 @@ public class Player : MonoBehaviour
         //isWallJumping = true; // will be used in HandleMovement to ignore zero velcity on x causing by the player's movement (only y is changing)
 
         rb.linearVelocity = new Vector2(wallJumpForce.x * -facingDir, wallJumpForce.y); // We won't just set isWallJumping to be false. We need coroutine, to ignore zero velcity on x causing by the player's movement
+        
+        AudioManager.instance.PlaySfx(12);
 
         Flip();
 

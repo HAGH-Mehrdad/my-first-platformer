@@ -196,7 +196,13 @@ public class GameManager : MonoBehaviour
         if (NoMoreLevels() == false)
         {
             PlayerPrefs.SetInt("ContinueLevelNumber", nextLevelIndex); // We save the next level number to use it for continue button in the main menu
-            PlayerPrefs.SetInt("LastSkinUsed", SkinManager.instance.GetSkinId()); // Save the last skin used by the player
+            
+            
+            SkinManager skinManager = SkinManager.instance;
+
+
+            if(skinManager != null)
+                PlayerPrefs.SetInt("LastSkinUsed", SkinManager.instance.GetSkinId()); // Save the last skin used by the player
 
         }
     }

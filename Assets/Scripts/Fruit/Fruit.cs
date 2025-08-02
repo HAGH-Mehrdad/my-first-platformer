@@ -51,6 +51,9 @@ public class Fruit : MonoBehaviour
         if (player != null)
         {
             gameManager.AddFruit();
+
+            AudioManager.instance.PlaySfx(8);
+
             Destroy(gameObject);
 
             

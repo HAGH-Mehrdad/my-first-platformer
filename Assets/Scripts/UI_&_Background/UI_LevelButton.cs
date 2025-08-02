@@ -32,7 +32,7 @@ public class UI_LevelButton : MonoBehaviour
         PlayerPrefs.SetInt("GameDifficulty", difficultyIndex);
         SceneManager.LoadScene(sceneName);
 
-        AudioManager.instance.PlaySfx(4); // Play the sound effect when the level is loaded
+        AudioManager.instance.PlaySfx(4 , false); // Play the sound effect when the level is loaded
     }
 
     private string TimerInfotxt()
