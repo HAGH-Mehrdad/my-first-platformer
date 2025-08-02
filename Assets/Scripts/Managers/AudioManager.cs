@@ -17,10 +17,13 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject); // avoid duplicates when load a new scene.
     }
 
-    public void PlaySfx(int sfxToPlay)
+    public void PlaySfx(int sfxToPlay, bool randomPitch = true)
     {
         if (sfxToPlay >= sfx.Length)
             return;
+
+        if(randomPitch)
+            sfx[sfxToPlay].pitch = Random.Range(0.9f, 1.1f); // Random pitch to make the sound more dynamic
 
         sfx[sfxToPlay].Play();
     }
