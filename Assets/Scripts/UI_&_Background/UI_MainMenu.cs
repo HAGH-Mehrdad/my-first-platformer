@@ -45,12 +45,14 @@ public class UI_MainMenu : MonoBehaviour
         }
 
         uiToEnable.SetActive(true);
+        AudioManager.instance.PlaySfx(4);
     }
 
 
     public void NewGame() 
     {
         fadeEffect.ScreenFade(1, fadeDuration , LoadLevelScene);// For seeing the fade out effect clikcing the new game button
+        AudioManager.instance.PlaySfx(4);
     }
 
     private void LoadLevelScene() => SceneManager.LoadScene(firstLevel);
@@ -73,6 +75,8 @@ public class UI_MainMenu : MonoBehaviour
 
         int levelToLoad = PlayerPrefs.GetInt("ContinueLevelNumber", 0); // Get the saved level number to continue
         SceneManager.LoadScene("Level_" + levelToLoad); // Load the saved level
+
+        AudioManager.instance.PlaySfx(4);
 
     }
 

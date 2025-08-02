@@ -1,2 +1,10 @@
 AUDIO SETTINGS
-- 
+- This game object will not be destroyed on changing levels or dying. (singleton) 
+public static AudioManager instance; // singleton reference
+
+	=> static means it’s shared across all instances of this class.
+	   It allows any other script to access the AudioManager using:
+	   AudioManager.instance.Play("Jump"); (for example).
+
+- we declare an array of sfx in AudioSource class in which we can call the sfx by their index
+- adding manually the sound to the buttons we need to play by calling audio manager instance which is static and then the method play

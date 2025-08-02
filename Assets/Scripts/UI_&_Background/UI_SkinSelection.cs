@@ -53,6 +53,8 @@ public class UI_SkinSelection : MonoBehaviour
         }
 
         UpdateSkinDisplay();
+
+        AudioManager.instance.PlaySfx(4);
     }
 
     public void NextSkin()
@@ -65,6 +67,8 @@ public class UI_SkinSelection : MonoBehaviour
         }
 
         UpdateSkinDisplay();
+
+        AudioManager.instance.PlaySfx(4);
     }
 
 
@@ -78,6 +82,8 @@ public class UI_SkinSelection : MonoBehaviour
         }
 
         UpdateSkinDisplay();
+
+        AudioManager.instance.PlaySfx(4);
     }
 
     private void UpdateSkinDisplay()
