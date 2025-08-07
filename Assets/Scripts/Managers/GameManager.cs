@@ -57,11 +57,6 @@ public class GameManager : MonoBehaviour
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;// to have the information about what level we are in.
         nextLevelIndex = currentLevelIndex + 1; // We can use this variable to load the next level in many places
 
-        if (audioManager == null)
-        {
-            audioManager = FindFirstObjectByType<AudioManager>();
-        }
-
         CollectFruitsInfo();
         ShowAllFruitsInBank(); // to know how many fruits does the player has collected
     }
