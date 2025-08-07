@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;// to have the information about what level we are in.
         nextLevelIndex = currentLevelIndex + 1; // We can use this variable to load the next level in many places
 
+        if(respawnPoint == null)
+        {
+            respawnPoint = FindFirstObjectByType<StartPoint>().transform; // We find the first player in the scene and use its transform as the respawn point
+        }
+
         CreateManagersIfneeded(); // We create the Managers if it doesn't exist e.g., AudioManager
 
         CollectFruitsInfo();
@@ -86,7 +91,8 @@ public class GameManager : MonoBehaviour
 
     private void CreateManagersIfneeded()
     {
-        Instantiate(audioManager);
+        if(audioManager == null)
+            Instantiate(audioManager);
     }
 
     public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint;
