@@ -1,0 +1,7 @@
+VOLUME SETTINGS
+
+after creating audio mixer and declaring expose volume parameter for each channel we should must know that assigning the methods to pass the value of slider to the mixer we need to be careful about choosing the methods from above. If we don't do it, on value change expects us to manually receive values rather than taking numbers from the slider.
+in another word, we should assign the dynamic float parameter methods to the slider rather than static float parameter. this helps unity to call the OnValueChanged() event of the sliders with a dynamic parameter. 
+
+
+Another thing I have learned is that for Slider class we must use UnityEngine.UI namespace rather than UnityEngine.UIElements
