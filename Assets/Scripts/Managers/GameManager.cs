@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;// to have the information about what level we are in.
         nextLevelIndex = currentLevelIndex + 1; // We can use this variable to load the next level in many places
 
+        CreateManagersIfneeded(); // We create the Managers if it doesn't exist e.g., AudioManager
+
         CollectFruitsInfo();
         ShowAllFruitsInBank(); // to know how many fruits does the player has collected
     }
@@ -80,6 +82,11 @@ public class GameManager : MonoBehaviour
         uiInGame.UpdateFruitUI(fruitsCollected, totalFruits);
 
         PlayerPrefs.SetInt("Level" + currentLevelIndex + "totalFruits", totalFruits);
+    }
+
+    private void CreateManagersIfneeded()
+    {
+        Instantiate(audioManager);
     }
 
     public void UpdateRespawnPosition(Transform newRespawnPoint) => respawnPoint = newRespawnPoint;
