@@ -22,7 +22,6 @@ public class AudioManager : MonoBehaviour
         InvokeRepeating(nameof(PlayBGMIfNeeded), 0f, 2f); // check every two seconds if the BGM is playing, if not, play a random one
     }
 
-
     public void PlayMainMenuMusic()
     {
         PlayBgm(0); // usually the first one is the main menu music
@@ -51,7 +50,6 @@ public class AudioManager : MonoBehaviour
         bgmIndex = bgmToPlay;// store the index of the currently playing BGM (we do not interrupt the current one, we just stop it and play a new one)
         bgm[bgmToPlay].Play();
     }
-
     public void PlaySfx(int sfxToPlay, bool randomPitch = true)
     {
         if (sfxToPlay >= sfx.Length)
