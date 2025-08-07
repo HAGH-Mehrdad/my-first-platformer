@@ -19,6 +19,9 @@ public class AudioManager : MonoBehaviour
         else
             Destroy(this.gameObject); // avoid duplicates when load a new scene.
 
+        if (bgm.Length <= 0)
+            return;
+
         InvokeRepeating(nameof(PlayBGMIfNeeded), 0f, 2f); // check every two seconds if the BGM is playing, if not, play a random one
     }
 
@@ -42,6 +45,12 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBgm(int bgmToPlay)
     {
+        if (bgm.Length <= 0)
+        {
+            Debug.LogWarning("No BGM audio sources assigned in AudioManager.");
+            return;
+        }
+
         for (int i = 0; i < bgm.Length; i++)
         {
             bgm[i].Stop();
