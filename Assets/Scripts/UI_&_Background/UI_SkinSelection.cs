@@ -53,6 +53,8 @@ public class UI_SkinSelection : MonoBehaviour
         }
 
         UpdateSkinDisplay();
+
+        //AudioManager.instance.PlaySfx(5); // it is called once in switch ui method
     }
 
     public void NextSkin()
@@ -65,6 +67,8 @@ public class UI_SkinSelection : MonoBehaviour
         }
 
         UpdateSkinDisplay();
+
+        AudioManager.instance.PlaySfx(5, false);
     }
 
 
@@ -78,6 +82,8 @@ public class UI_SkinSelection : MonoBehaviour
         }
 
         UpdateSkinDisplay();
+
+        AudioManager.instance.PlaySfx(5 , false);
     }
 
     private void UpdateSkinDisplay()
@@ -109,6 +115,7 @@ public class UI_SkinSelection : MonoBehaviour
     {
         if (HaveEnoughFruits(skinList[index].skinPrice) == false)
         {
+            AudioManager.instance.PlaySfx(6);
             Debug.Log("Not enough fruits!");
             return;
         }

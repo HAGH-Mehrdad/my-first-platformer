@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 1);//Reference to player's position (Starts immediately and repeats every second)
+        InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 4);//Reference to player's position (Starts immediately and repeats every second)
 
         // Look changeDefaultFacingDirection() to understand well
         if (sr.flipX == true && !facinRight)//check the facing direction of the enemy when the game starts. (if the designer used changing direction from context menu)

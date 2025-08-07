@@ -36,6 +36,7 @@ public class CheckPoint : MonoBehaviour
     {
         active = true;
         anim.SetTrigger("activates"); // instead of using SetBool we use SetTrigger to activate the animation once
+        AudioManager.instance.PlaySfx(11); // Play the checkpoint activation sound
         GameManager.instance.UpdateRespawnPosition(transform);
     }
 }
