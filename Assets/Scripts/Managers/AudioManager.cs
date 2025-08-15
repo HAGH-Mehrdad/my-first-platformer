@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -22,7 +23,22 @@ public class AudioManager : MonoBehaviour
         if (bgm.Length <= 0)
             return;
 
+        if (SceneManager.GetActiveScene().buildIndex == 0)// I want the main menu music to play when the game starts
+            PlayMainMenuMusic();
+
         InvokeRepeating(nameof(PlayBGMIfNeeded), 0f, 2f); // check every two seconds if the BGM is playing, if not, play a random one
+    }
+
+
+    private void Update()
+    {
+        if (bgm[0].isPlaying && SceneManager.GetActiveScene().buildIndex != 0)// change the music when the scene changes, except for the main menu
+            ChangeMusic(); 
+    }
+
+    private void ChangeMusic()// play a random BGM when the scene changes, except for the main menu
+    {
+        PlayRandomBGM(); 
     }
 
     public void PlayMainMenuMusic()
