@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
     {
         if (player == null)
         {
-            player = GameManager.instance.player.transform;
+            player = PlayerManager.instance.player.transform;
         }
     }
 
