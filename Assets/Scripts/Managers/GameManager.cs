@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     [Header("Audio Manager")]
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private PlayerManager playerManager;
+    [SerializeField] private SkinManager skinManager;
+    [SerializeField] private DifficultyManager difficultyManager;
 
 
 
@@ -86,6 +88,12 @@ public class GameManager : MonoBehaviour
 
         if(PlayerManager.instance == null)
             Instantiate(playerManager);
+
+        if(SkinManager.instance == null)
+            Instantiate(skinManager);
+
+        if(DifficultyManager.instance == null)
+            Instantiate(difficultyManager);
     }
 
 
