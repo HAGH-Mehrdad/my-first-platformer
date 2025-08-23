@@ -20,18 +20,18 @@ public class GameManager : MonoBehaviour
     public int fruitsCollected;
     public int totalFruits;
     public int allFruits;
+    public Transform fruitParent;
 
     [Header("Checkpoint")]
     public bool canReactivated; // If true, the checkpoint can be activated again and again (we can reactivate it in the inspector)
 
-    [Header("Arrow")]
-    public GameObject arrowPrefab;
 
     [Header("Audio Manager")]
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private SkinManager skinManager;
     [SerializeField] private DifficultyManager difficultyManager;
+    [SerializeField] private ObjectCreator objectCreator;
 
 
 
@@ -81,6 +81,21 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Level" + currentLevelIndex + "totalFruits", totalFruits);
     }
 
+
+    [ContextMenu("Parent all fruits")]
+    private void ParentAllTheFruits()
+    {
+        if (fruitParent == null)
+            return;
+
+        Fruit[] allFruits = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
+
+        foreach (Fruit fruit in allFruits)
+        {
+            fruit.transform.parent = fruitParent; // Set the parent of each fruit to the fruitParent transform
+        }
+    }
+
     private void CreateManagersIfneeded()
     {
         if(AudioManager.instance == null)
@@ -94,6 +109,9 @@ public class GameManager : MonoBehaviour
 
         if(DifficultyManager.instance == null)
             Instantiate(difficultyManager);
+
+        if(ObjectCreator.instance == null)
+            Instantiate(objectCreator);
     }
 
 
@@ -119,24 +137,7 @@ public class GameManager : MonoBehaviour
 
     public bool FruitsHaveRandomLook() => fruitsAreRandom;
 
-
-    //This method is versitile and if I want to pull another object from the game manager, I can
-    public void CreateGameObject(GameObject prefab, Transform target, float delay = 0)
-    {
-        StartCoroutine(CreateGameObjectCoroutine(prefab, target, delay));
-    }
-
-    private IEnumerator CreateGameObjectCoroutine(GameObject prefab, Transform target, float delay)
-    {
-        Vector3 position = target.position;//We store the target trasform first becuase later we might loose the trasform of the game object we want to instantiate.
-        
-        yield return new WaitForSeconds(delay);
-
-
-        GameObject newGameObject = Instantiate(prefab, position, Quaternion.identity);
-    }
-
-
+    
     public void LevelFinished()
     {
         SaveLevelProgression();
