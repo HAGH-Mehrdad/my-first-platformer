@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AnimatorOverrideController[] animators;
     [SerializeField] private int skinId;
     [SerializeField] private GameObject deathVFX;
+    [SerializeField] private ParticleSystem dustVFX;
 
 
 
@@ -306,6 +307,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleLanding()
     {
+        dustVFX.Play();
         isAirborne = false;
         canDoubleJump = true;
         AttemptBufferJump();
@@ -378,6 +380,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
+        dustVFX.Play();
         AudioManager.instance.PlaySfx(3);
 
         rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
@@ -387,6 +390,7 @@ public class Player : MonoBehaviour
 
     private void DoubleJump()
     {
+        dustVFX.Play();
         isWallJumping = false;
         canDoubleJump = false;
         rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpForce);
@@ -396,6 +400,7 @@ public class Player : MonoBehaviour
 
     private void WallJump()
     {
+        dustVFX.Play();
         canDoubleJump = true;
         //isWallJumping = true; // will be used in HandleMovement to ignore zero velcity on x causing by the player's movement (only y is changing)
 
@@ -426,6 +431,8 @@ public class Player : MonoBehaviour
 
         if (!canWallSlide)
             return;
+
+        //dustVFX.Play(); this doesn't show very well but maybe in the future we can use it with some conditions
 
 
         rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * yModifier);
