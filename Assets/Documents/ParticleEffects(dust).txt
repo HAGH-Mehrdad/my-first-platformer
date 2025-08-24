@@ -1,3 +1,4 @@
 PARTICLE EFFECTS 
 
 - something important the I have to concern is that I should change the simulation space to world instead of local to prevent the dust following the player. 
+- I have added another particle effect to rhino when hitting the wall
