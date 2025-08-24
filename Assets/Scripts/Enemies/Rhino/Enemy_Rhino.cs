@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Enemy_Rhino : Enemy
@@ -8,7 +9,14 @@ public class Enemy_Rhino : Enemy
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float speedUpRate = 1.0f;//rate of speed change
     [SerializeField] private Vector2 impactForce = new Vector2(4,2);// I think it is better to assign default values. Because at the editor I forgot to do it at first
-    
+
+
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem dustFX;
+    [SerializeField] private Vector2 cameraImpactDir;
+    private CinemachineImpulseSource impulseSource;
+
+
     private float defaultSpeed;
 
 
@@ -19,6 +27,8 @@ public class Enemy_Rhino : Enemy
         canMove = false; // Rhino will not move until it detects the player at the beginning
 
         defaultSpeed = moveSpeed;//Saving the moving speed
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
 
@@ -27,6 +37,13 @@ public class Enemy_Rhino : Enemy
         base.Update();
 
         HandleCharge();
+    }
+
+    private void HitWallImpact()
+    {
+        dustFX.Play();
+        impulseSource.DefaultVelocity = new Vector2(cameraImpactDir.x * facingDir, cameraImpactDir.y);
+        impulseSource.GenerateImpulse();
     }
 
 
@@ -71,6 +88,7 @@ public class Enemy_Rhino : Enemy
     private void WallHit()
     {
         canMove = false;// to prevent intervention of velocity in charge method
+        HitWallImpact();
         SpeedReset();//reseting the speed
         anim.SetBool("wallHit" , true);
         rb.linearVelocity = new Vector2(impactForce.x * -facingDir, impactForce.y); // A problem I had here was that I declared Vector2 filed and I passed impactforce itself & linearVelocity.y
