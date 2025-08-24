@@ -1,0 +1,4 @@
+Important Notes:
+
+- I have to set all grounds composite collider 2d geometry values to polygon instead of outlines. I figured it out when adding the rhino dust effect as it hits the wall.
+	the rhino didn't forced back and play effects because it didn't detect the wall as solid object.
