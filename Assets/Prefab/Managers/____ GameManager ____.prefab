@@ -52,7 +52,7 @@ MonoBehaviour:
   allFruits: 0
   fruitParent: {fileID: 0}
   canReactivated: 0
-  audioManager: {fileID: 0}
+  audioManager: {fileID: 5752855703367789239, guid: e5a6282eb9754db4ab7f941960dc7f35, type: 3}
   playerManager: {fileID: 2174121737327498714, guid: e00ec2df979508e4ebcb5a4acd617be7, type: 3}
   skinManager: {fileID: 967149011032031801, guid: 8b3c93a2088515446bc4935168f2bbea, type: 3}
   difficultyManager: {fileID: 8532848878628304460, guid: 936477d781f6f994a876d570c4911884, type: 3}
