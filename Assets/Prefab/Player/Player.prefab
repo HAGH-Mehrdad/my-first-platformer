@@ -267,7 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0feed6b9b772eb545a052d4d865ca407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameDifficulty: 3
+  fruitDropped: {fileID: 974211194040649088, guid: 7fdd65ead82999b4fb4fb5910fb67445, type: 3}
+  gameDifficulty: 2
   moveSpeed: 8
   jumpForce: 14
   doubleJumpForce: 11

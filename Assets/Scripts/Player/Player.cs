@@ -7,6 +7,7 @@ using UnityEditor.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject fruitDropped;
 
     [SerializeField] private DifficultyType gameDifficulty;
     private GameManager gameManager;
@@ -131,6 +132,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                ObjectCreator.instance.CreateGameObject(fruitDropped, transform, true, 0);// Create the fruit dropped when damaged at the player's position
                 gameManager.RemoveFruitEasyMode();
             }
 
@@ -148,6 +150,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                ObjectCreator.instance.CreateGameObject(fruitDropped, transform, true, 0);// Create the fruit dropped when damaged at the player's position
                 gameManager.RemoveFruitNormalMode();
             }
 

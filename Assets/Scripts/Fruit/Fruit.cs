@@ -10,18 +10,20 @@ public class Fruit : MonoBehaviour
 
     private GameManager gameManager;
 
-    private Animator anim;
+    protected Animator anim;// Protected because we want to access it in the child class FruitDroppedWhenDamaged
+    protected SpriteRenderer sr;// We may need it in the child class FruitDroppedWhenDamaged
 
 
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
 
     // We do it in start because if we do it in awake it may happen that awake in this script may be executed first than the game manager instance
     // if it executed before, it may return null when we try to get the instance
-    private void Start()
+    protected virtual void Start()// Protected because we want to access it in the child class FruitDroppedWhenDamaged
     {
         gameManager = GameManager.instance;
         SetRandomLookIfNeeded();
@@ -44,7 +46,7 @@ public class Fruit : MonoBehaviour
     private void UpdateFruitVisuals() => anim.SetFloat("fruitIndex", (int)fruitType);// Because fruitType is an enum, we can cast it to int to get the index of the fruit type in the animator blend tree.
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)// Protected because we want to access it in the child class FruitDroppedWhenDamaged
     {
         Player player = collision.gameObject.GetComponent<Player>();
 
