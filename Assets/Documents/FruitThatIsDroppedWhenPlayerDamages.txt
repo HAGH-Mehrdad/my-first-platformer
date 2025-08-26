@@ -1,0 +1,9 @@
+FruitThatIsDroppedWhenPlayerDamages
+
+This script contains some important issues.
+
+- the for each loop works like this: when the fruit is dropped it starts blinking fast and then slow. (the parameters of float that I have passed is 0.1 blinking to 0.5 secs)
+
+-The reason fruit stays the same color is that Color.white means “don’t tint, fully visible.”
+	If you want true blinking with transparency only, you should keep the original RGB and adjust only the alpha channel.
+	(in the second Toggle method of co-routine in the mentioned script.)
