@@ -1,0 +1,4 @@
+TrapArrow
+
+- Trap arrow parameters changed because I have change the object creator co-routine with a bool that has a bool value which defines if the object can be destroyed after some
+	time. This bool added for dropped fruits by the player damage.
