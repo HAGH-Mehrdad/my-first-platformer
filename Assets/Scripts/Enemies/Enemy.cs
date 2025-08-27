@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        InvokeRepeating(nameof(UpdatePlayerRef) , 0 , 4);//Reference to player's position (Starts immediately and repeats every second)
 
         // Look changeDefaultFacingDirection() to understand well
         if (sr.flipX == true && !facinRight)//check the facing direction of the enemy when the game starts. (if the designer used changing direction from context menu)
@@ -60,9 +59,11 @@ public class Enemy : MonoBehaviour
             sr.flipX = false;
             Flip();
         }
+
+        PlayerManager.OnPlayerRespawn += UpdatePlayerReference; // subscribe to the player's reference insteade of Invoke repeating
     }
 
-    private void UpdatePlayerRef()
+    private void UpdatePlayerReference()
     {
         if (player == null)
         {
@@ -102,6 +103,8 @@ public class Enemy : MonoBehaviour
 
         if (Random.Range(0, 100) < 50)
             deathRotationDirection = -deathRotationDirection;//giving random death impact jump
+
+        PlayerManager.OnPlayerRespawn -= UpdatePlayerReference;
 
         Destroy(gameObject, 10f);
 

@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static event Action OnPlayerRespawn; // Event triggered when the player respawns
     public static PlayerManager instance;
 
 
@@ -62,5 +64,7 @@ public class PlayerManager : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
 
         player = newPlayer.GetComponent<Player>();
+
+        OnPlayerRespawn?.Invoke(); // Trigger the respawn event
     }
 }
