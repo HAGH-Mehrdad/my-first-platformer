@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
         cd = GetComponent<CapsuleCollider2D>();
         anim = GetComponentInChildren<Animator>();
 
+        FindFirstObjectByType<UI_JumpButton>().UpdatePlayerRef(this); // Find the UI_JumpButton instance and update the player reference
     }
 
     private void Start()
@@ -347,8 +348,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             JumpButton();
-            RequestBufferJump();
         }
+    }
+
+
+    public void JumpButton()
+    {
+        JumpAttempt();
+        RequestBufferJump();
     }
 
     /// <summary>
@@ -360,7 +367,7 @@ public class Player : MonoBehaviour
     /// - Wall Jump
     /// </remarks>
     /// </summary>
-    private void JumpButton()
+    private void JumpAttempt()
     {
         bool coyoteJumpAvailable = Time.time < coyoteJumpActivated + coyoteJumpWindow; // checking the timer from the player's hitting jump button with the time availabe for coyote jump
 
