@@ -1,0 +1,14 @@
+MobileControl
+
+This is for movement and jump button
+- the right side is for all jump functions
+- the left side is for joystick (package name: joystick pack b Fenerax studio)
+
+These two objects are added to UI_InGame
+
+for jump button we added a button and on its script, it should have a reference to the player.
+	 it also inherits from IPointerDownHandler. in its interface it tells the player to call the jump button.
+
+for joystick we should add variable joystick prefab and can change to float joystick type
+	in addition we find the first object of joystick in player's script and change the x,y input values 
+	NOTE: I commented x,y input value of keyboard because it won't work. I'll undo them in case of testing with keyboard
