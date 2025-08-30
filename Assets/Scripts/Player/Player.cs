@@ -68,8 +68,9 @@ public class Player : MonoBehaviour
     private bool isWallDetected;
 
 
-    private float xInput;
-    private float yInput;
+    private float xInput;// for keyboard
+    private float yInput;// for keyboard
+    private Joystick joystick;// For touch screen
 
     private bool facingRight = true;
     private int facingDir = 1;
@@ -81,6 +82,8 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
 
         FindFirstObjectByType<UI_JumpButton>().UpdatePlayerRef(this); // Find the UI_JumpButton instance and update the player reference
+
+        joystick = FindFirstObjectByType<Joystick>();
     }
 
     private void Start()
@@ -342,8 +345,13 @@ public class Player : MonoBehaviour
 
     private void HandleInput()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
-        yInput = Input.GetAxisRaw("Vertical");
+        //We should use only one input method. Either keyboard or joystick
+
+        //xInput = Input.GetAxisRaw("Horizontal");
+        //yInput = Input.GetAxisRaw("Vertical");
+
+        xInput = joystick.Horizontal;
+        yInput = joystick.Vertical;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
