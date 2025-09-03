@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System;
-using UnityEditor.SceneManagement;
 
 public class Player : MonoBehaviour
 {
