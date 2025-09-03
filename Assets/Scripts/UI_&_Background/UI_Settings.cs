@@ -19,6 +19,13 @@ public class UI_Settings : MonoBehaviour
     [SerializeField] private string bgmParameter;
 
 
+
+    public void ApplySavedSettings()
+    {
+        sfxSlider.value = PlayerPrefs.GetFloat(sfxParameter, 0.7f);
+        bgmSlider.value = PlayerPrefs.GetFloat(bgmParameter, 0.7f);
+    }
+
     public void SetSfxVolume(float value)// SetSfx and SetBgm methods are assined to the sliders 
     {
         float newValue = Mathf.Log10(value) * audioMultiplier; // logarithmic scale for audio

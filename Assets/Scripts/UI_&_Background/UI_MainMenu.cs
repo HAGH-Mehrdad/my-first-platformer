@@ -8,6 +8,7 @@ public class UI_MainMenu : MonoBehaviour
 
     [SerializeField] private string firstLevel = "Level_1";// The name of the scene to load for a new game
 
+    [SerializeField] private UI_Settings uiSettings; // Reference to the settings UI script
 
     [SerializeField] private float fadeDuration = 1.5f;
 
@@ -25,10 +26,18 @@ public class UI_MainMenu : MonoBehaviour
     private void Awake()
     {
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
+
+        //For better performance, we set the target frame rate to 60 fps
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+        Screen.SetResolution(Screen.width, Screen.height , FullScreenMode.FullScreenWindow, new RefreshRate() {numerator = 60 ,denominator= 1});
     }
 
     private void Start()
     {
+        if(uiSettings != null)
+            uiSettings.ApplySavedSettings(); // Apply saved audio settings when the main menu starts
+
         if (HasLevelProgression())
             continueButton.SetActive(true); // If the player has a saved level progression, we enable the continue button
         else
