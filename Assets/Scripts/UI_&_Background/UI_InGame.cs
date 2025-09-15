@@ -18,16 +18,22 @@ public class UI_InGame : MonoBehaviour
 
     private bool isPaused = false; // Flag to check if the game is paused
 
+    private PopUpSystem pop;
+
     private void Awake()
     {
         instance = this;
 
         fadeEffect = GetComponentInChildren<UI_FadeEffect>();
+
+        pop = GetComponentInChildren<PopUpSystem>();
     }
 
     private void Start()
     {
         fadeEffect.ScreenFade(0, fadeDuration);
+
+        Invoke("PopUpDelay", 1f);
     }
 
     private void Update()
@@ -36,6 +42,11 @@ public class UI_InGame : MonoBehaviour
         {
             PauseButtonPressed();
         }
+    }
+
+    private void PopUpDelay()
+    {
+        pop.PopUp();
     }
 
     public void PauseButtonPressed()
