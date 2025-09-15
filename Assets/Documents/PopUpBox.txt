@@ -1,0 +1,6 @@
+PopUpBox
+
+added a pop up system that indicates what information must be told to the player. for example, in the first level it tells the player how to play the game with text. 
+	in the future I will add a simple story for each level.
+
+-I have learned something interesting: if you add an object to a button event system and the object has the animator component, then you can add an animation trigger by its name or integer.
