@@ -100,4 +100,9 @@ public class UI_MainMenu : MonoBehaviour
         menuCharacter.MoveTo(skinSelectionPoint);
         cinemachineCamera.Follow = skinSelectionPoint;
     }
+
+    public void QuitApp()
+    {
+        Application.Quit();
+    }
 }
