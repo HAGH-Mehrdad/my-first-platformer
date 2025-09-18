@@ -30,6 +30,7 @@ public class Enemy_Bullet : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer(playerLayerName))
         {
             collision.GetComponent<Player>().Knockback(transform.position.x);
+            collision.GetComponent<Player>().Damage();
             Destroy(gameObject);
         }
 
