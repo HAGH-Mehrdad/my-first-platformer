@@ -56,7 +56,8 @@ public class Enemy_Chicken : Enemy
         if (canMove == false)
             return; // If the idle [animation] timer is not finished, do not move
 
-        HandleFlip(player.transform.position.x);
+        //HandleFlip(player.transform.position.x);
+        HandleFlip(PlayerManager.instance.player.transform.position.x);
 
         if (isGroundAheadDetected)//this condition removes jittering effect when the player is falling from a platform or is simply not on the ground
             rb.linearVelocity = new Vector2(moveSpeed * facingDir, rb.linearVelocityY);
