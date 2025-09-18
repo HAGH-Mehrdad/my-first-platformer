@@ -46,6 +46,7 @@ public class UI_InGame : MonoBehaviour
 
     private void PopUpDelay()
     {
+        if(pop == null) return;
         pop.PopUp();
     }
 
