@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cd = GetComponent<CapsuleCollider2D>();
         anim = GetComponentInChildren<Animator>();
-
+        
         FindFirstObjectByType<UI_JumpButton>().UpdatePlayerRef(this); // Find the UI_JumpButton instance and update the player reference
 
         joystick = FindFirstObjectByType<Joystick>();
@@ -346,15 +346,38 @@ public class Player : MonoBehaviour
     {
         //We should use only one input method. Either keyboard or joystick
 
-        //xInput = Input.GetAxisRaw("Horizontal");
-        //yInput = Input.GetAxisRaw("Vertical");
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
 
-        xInput = joystick.Horizontal;
-        yInput = joystick.Vertical;
+        //xInput = joystick.Horizontal;
+        //yInput = joystick.Vertical;
+
+        if(yInput < 0 && isGrounded) // If the player is pressing down and is grounded, we want to drop through the platform
+        {
+            StartCoroutine(DisableCollisionTemporarily());
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             JumpButton();
+        }
+    }
+
+
+    private IEnumerator DisableCollisionTemporarily()
+    {
+        // A reycast to detect the platform below the player
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, whatIsGround);
+
+        if (hit.collider != null)
+        {
+            PlatformEffector2D effector = hit.collider.GetComponent<PlatformEffector2D>();
+            if (effector != null)
+            {
+                effector.rotationalOffset = 180f;
+                yield return new WaitForSeconds(0.5f);
+                effector.rotationalOffset = 0f;
+            }
         }
     }
 
